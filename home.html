@@ -1,81 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- TODO
+ - fix hero font
+ - make fonts mor proportional
+ - figure out if skills section should be a filter or non interactive
+ - make selcted works more legeible 
+ - increase legiblity overal
+ - fix links
+ - clean up css
+ - fix SVGs  -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Faiza Rahman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@300;400&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
 
 </head>
 
 <body>
-    <header>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
 
-    <main>
-        <section class="hero" >
+    <nav>
+        <a class="nav-logo" href="#">FR</a>
+        <ul class="nav-links">
+            <li><a href="#top">About</a></li>
+            <li><a href="#projects">Work</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
+    <!-- HERO -->
+    <section class="hero" id="top">
+        <div class="hero-type" aria-label="Full Stack Data Driven">
+            <div class="word"><span>Full-Stack</span></div>
+            <div class="word"><span>
+                    <span class="underlined">Data Driven
+                        <svg viewBox="0 0 300 12" fill="none" aria-hidden="true">
+                            <path d="M3 8 C50 3, 110 11, 180 6 C230 2, 270 9, 297 6" stroke="#C8F135" stroke-width="3.5"
+                                stroke-linecap="round" stroke-dasharray="320" stroke-dashoffset="320">
+                                <animate attributeName="stroke-dashoffset" from="320" to="0" dur="0.9s" begin="0.55s"
+                                    fill="freeze" />
+                            </path>
+                        </svg>
+                    </span>
+                </span></div>
+        </div>
 
-            <div class="hero-content">
-                <h1>Full-Stack <br> Data-Focused<br></h1>
+        <div class="hero-meta">
+            <div>
+                <div class="hero-meta-name">Faiza Rahman</div>
+                <div class="hero-meta-title">Computer Science Graduate</div>
+                <p class="hero-meta-desc">I build practical systems and interfaces that turn data into decisions.</p>
 
-                <p class="name">FAIZA RAHMAN</p>
-                <p class="subtitle1">Software Engineer</p>
-
-                <p class="subtitle2">
-                    I build practical systems and interfaces that turn data into decisions.
-                </p>
-                <p class="subtitle2">
-                    Design and UX experience to ship usable, real-world products.
-                </p>
-                <div class="cta">
-                    <a href="resume.pdf" target="_blank">Resume</a>
-                    <a href="https://github.com/frahma1" target="_blank">GitHub</a>
+                <div class="hero-cta">
+                    <a href="resume.pdf" target="/resume.pdf" class="btn-sm btn-dark">Resume</a>
+                    <a href="https://github.com/frahma1" target="_blank" class="btn-sm btn-outline">GitHub</a>
                 </div>
             </div>
-        </section>
-        <section class="about" id="about">
+        </div>
+    </section>
 
-            <div>
-                <h3>DATA & ANALYTICS</h3>
-                <p>
-                    Turning raw, messy data into insights
-                    through pipelines, SQL analysis,
-                    and decision-focused dashboards.</p>
-            </div>
-            <h3>FULL-STACK ENGINEERING</h3>
-            <p>
-                Designing and shipping end-to-end systems;
-                APIs, databases, frontend,
-                and deployment.</p>
-            </div>
-            <h3>UX-DRIVEN DEVELOPMENT
+    <!-- DISCIPLINES -->
+    <section class="disciplines" id="about">
+        <div class="disc-card reveal">
+            <div class="disc-num">01 — Data &amp; Analytics</div>
+            <h3>Data &amp; Analytics</h3>
+            <p>Turning raw data into insights through pipelines, SQL analysis, and decision-focused dashboards.</p>
+            <svg class="disc-doodle" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <path d="M6 40 L12 20 L20 30 L28 12 L36 24 L42 8" stroke="black" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </div>
+        <div class="disc-card reveal d1">
+            <div class="disc-num">02 — Full-Stack Engineering</div>
+            <h3>Full-Stack Engineering</h3>
+            <p>Designing and shipping end-to-end systems: APIs, databases, frontend, and deployment.</p>
+            <svg class="disc-doodle" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <rect x="6" y="6" width="14" height="14" stroke="black" stroke-width="1.3" fill="none" rx="2"
+                    transform="rotate(10 13 13)" />
+                <rect x="28" y="28" width="14" height="14" stroke="black" stroke-width="1.3" fill="none" rx="2"
+                    transform="rotate(-8 35 35)" />
+            </svg>
+        </div>
+        <div class="disc-card reveal d2">
+            <div class="disc-num">03 — UX-Driven Development</div>
+            <h3>UX-Driven Development</h3>
+            <p>Applying UX and visual design principles to improve clarity, usability, and adoption.</p>
+            <svg class="disc-doodle" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <circle cx="24" cy="24" r="15" stroke="black" stroke-width="1.3" fill="none" stroke-dasharray="3 3" />
+                <circle cx="24" cy="24" r="4" stroke="black" stroke-width="1.1" fill="none" />
+            </svg>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="projects-section" id="projects">
+        <div class="projects-label">Selected Work — 2022–Present</div>
+
+        <div class="project-row">
+            <a class="project-card reveal" href="#" target="_blank">
+                <div>
+                    <h2>Navajo White</h2>
+                    <p>Designed and built a decentralized full-stack system with authentication, APIs, and CI/CD across
+                        multiple nodes</p>
+                </div>
+                <div class="project-card-bottom">
+                    <span class="project-tags-line">Python · Django · SQL · APIs · CI/CD</span>
+                    <div class="project-arrow">↗</div>
+                </div>
+            </a>
+            <div class="project-spacer"></div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-spacer"></div>
+            <a class="project-card right reveal" href="#" target="_blank">
+                <div>
+                    <h2>Public-Sector Data Pipeline</h2>
+                    <p>Built automated data extraction, transformation, and validation pipelines integrating structured
+                        files into geospatial analysis workflows</p>
+                </div>
+                <div class="project-card-bottom">
+                    <span class="project-tags-line">Python · ETL · Excel Automation · Data Validation</span>
+                    <div class="project-arrow">↗</div>
+                </div>
+            </a>
+        </div>
+
+        <div class="project-row">
+            <a class="project-card reveal" href="#" target="_blank">
+                <div>
+                    <h2>Tartan Security Project</h2>
+                    <p>Implemented end-to-end automated testing pipelines to improve reliability and reduce manual QA
+                        effort.</p>
+                </div>
+                <div class="project-card-bottom">
+                    <span class="project-tags-line">Docker · Github Actions · AB Testing · SonarQube</span>
+                    <div class="project-arrow">↗</div>
+                </div>
+            </a>
+            <div class="project-spacer"></div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-spacer"></div>
+            <a class="project-card right reveal" href="https://www.faiza-rahman.com/projects/mindsea" target="_blank">
+                <div>
+                    <h2>MindSea</h2>
+                    <p>Mental health app tracking emotions and providing resources for students. Full UX research,
+                        prototyping, and testing cycle.</p>
+                </div>
+                <div class="project-card-bottom">
+                    <span class="project-tags-line">Product Thinking · UX Research · System Design</span>
+                    <div class="project-arrow">↗</div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+        <!-- Replace SVG below with <img src="your-photo.jpg"> -->
+        <div class="contact-photo" aria-label="Profile photo placeholder">
+            <svg viewBox="0 0 170 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="170" height="170" fill="#d8d3ca" />
+                <circle cx="85" cy="68" r="30" fill="#b3aea6" />
+                <ellipse cx="85" cy="138" rx="46" ry="34" fill="#b3aea6" />
+            </svg>
+        </div>
+
+        <div class="contact-card reveal">
+            <h3>
+                Let's Talk
+                <svg viewBox="0 0 110 8" fill="none" aria-hidden="true">
+                    <path d="M2 5 C18 2, 48 7, 72 4 C90 2, 102 6, 108 4" stroke="#C8F135" stroke-width="2"
+                        stroke-linecap="round" />
+                </svg>
             </h3>
-            <p>
-                Applying UX and visual design principles
-                to improve clarity, usability,
-                and adoption.</p>
+            <p>I'm currently seeking new-grad software or data-focused roles and open to conversations.</p>
+            <div class="contact-links-list">
+                <div>
+                    <div class="email-row">
+                        <a class="contact-link" href="mailto:faiza.rahman@ualberta.ca">faiza.rahman@ualberta.ca</a>
+                        <button class="copy-btn" onclick="copyEmail()">Copy</button>
+                    </div>
+                    <div class="copy-feedback" id="copyFeedback">Copied ✓</div>
+                </div>
+                <a class="contact-link" href="https://www.linkedin.com/in/faiza-rahman/" target="_blank">LinkedIn</a>
+                <a class="contact-link" href="https://github.com/frahma1" target="_blank">GitHub</a>
             </div>
+        </div>
+    </section>
 
-        </section>
-        <section id="projects">
-            <h3>Projects</h3>
-        </section>
-        <section id="contact">
-            <h3>Let's Chat!</h3>
-            <p>I love building systems that solve real problems and crafting interfaces that people enjoy using. If you’re working on a project, tackling a technical challenge, or just want to chat about data-driven design, I’d love to connect.</p>
-        <p>Connect with me:
-<a href="https://github.com/frahma1" target="_blank">GitHub</a> |<a href="https://www.linkedin.com/in/faiza-rahman/" target="_blank">LinkedIn</a>  | Email</p>
-<!-- C!!!copry email function -->
-        </section>
+    <footer>
+        <span>Faiza Rahman © 2025</span>
+        <span>Edmonton, AB</span>
+    </footer>
 
-    </main>
+    <script>
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.07 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        function copyEmail() {
+            navigator.clipboard.writeText('faiza.rahman@ualberta.ca').then(() => {
+                const fb = document.getElementById('copyFeedback');
+                fb.classList.add('show');
+                setTimeout(() => fb.classList.remove('show'), 2000);
+            });
+        }
+    </script>
 
 </body>
 
