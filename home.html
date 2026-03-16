@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
 <!-- TODO
  - fix hero font
  - make fonts mor proportional
@@ -9,6 +11,8 @@
  - fix links
  - clean up css
  - fix SVGs  -->
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,6 +29,8 @@
 
 <body>
 
+
+
     <nav>
         <a class="nav-logo" href="#">FR</a>
         <ul class="nav-links">
@@ -37,12 +43,36 @@
     <!-- HERO -->
     <section class="hero" id="top">
         <div class="hero-type" aria-label="Full Stack Data Driven">
-            <div class="word"><span>Full-Stack</span></div>
+            <div class="word"><span class="underlined">Full-Stack
+                    <svg viewBox="0 0 300 12" fill="none" aria-hidden="true">
+                        <defs>
+                            <filter id="grease" x="-2%" y="-80%" width="104%" height="260%">
+                                <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="4" seed="8"
+                                    result="noise" />
+                                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2" xChannelSelector="R"
+                                    yChannelSelector="G" />
+                            </filter>
+                        </defs>
+                        <path d="M3 8 C50 3, 110 11, 180 6 C230 2, 270 9, 297 6" stroke="#C8F135" stroke-width="3.5"
+                            stroke-linecap="round" stroke-dasharray="320" stroke-dashoffset="320" filter="url(#grease)">
+                            <animate attributeName="stroke-dashoffset" from="320" to="0" dur="0.9s" begin="0.55s"
+                                fill="freeze" />
+                        </path>
+                    </svg>
+                </span></div>
             <div class="word"><span>
                     <span class="underlined">Data Driven
                         <svg viewBox="0 0 300 12" fill="none" aria-hidden="true">
-                            <path d="M3 8 C50 3, 110 11, 180 6 C230 2, 270 9, 297 6" stroke="#C8F135" stroke-width="3.5"
-                                stroke-linecap="round" stroke-dasharray="320" stroke-dashoffset="320">
+                            <defs>
+                            <filter id="grease" x="-2%" y="-80%" width="104%" height="260%">
+                                <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="4" seed="8"
+                                    result="noise" />
+                                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2" xChannelSelector="R"
+                                    yChannelSelector="G" />
+                            </filter>
+                        </defs>
+                            <path d="M3 8 C80 5, 120 8, 180 6 C230 2, 200 9, 297 6" stroke="#C8F135" stroke-width="3.5"
+                                stroke-linecap="round" stroke-dasharray="320" stroke-dashoffset="320"filter="url(#grease)">
                                 <animate attributeName="stroke-dashoffset" from="320" to="0" dur="0.9s" begin="0.55s"
                                     fill="freeze" />
                             </path>
@@ -53,8 +83,8 @@
 
         <div class="hero-meta">
             <div>
-                <div class="hero-meta-name">Faiza Rahman</div>
-                <div class="hero-meta-title">Computer Science Graduate</div>
+                <div class="hero-meta-name hero-meta-text">Faiza Rahman</div>
+                <div class="hero-meta-title .hero-meta-text">Software Engineer</div>
                 <p class="hero-meta-desc">I build practical systems and interfaces that turn data into decisions.</p>
 
                 <div class="hero-cta">
@@ -184,13 +214,13 @@
             </h3>
             <p>I'm currently seeking new-grad software or data-focused roles and open to conversations.</p>
             <div class="contact-links-list">
-                <div>
-                    <div class="email-row">
-                        <a class="contact-link" href="mailto:faiza.rahman@ualberta.ca">faiza.rahman@ualberta.ca</a>
-                        <button class="copy-btn" onclick="copyEmail()">Copy</button>
-                    </div>
-                    <div class="copy-feedback" id="copyFeedback">Copied ✓</div>
+
+                <div class="email-row">
+                    <a class="contact-link" href="mailto:faiza.rahman@ualberta.ca">faiza.rahman@ualberta.ca</a>
+                    <button class="copy-btn" id="copy-btn" onclick="copyEmail()">Copy</button>
                 </div>
+                <div class="copy-feedback" id="copyFeedback">Copied ✓</div>
+
                 <a class="contact-link" href="https://www.linkedin.com/in/faiza-rahman/" target="_blank">LinkedIn</a>
                 <a class="contact-link" href="https://github.com/frahma1" target="_blank">GitHub</a>
             </div>
@@ -198,8 +228,8 @@
     </section>
 
     <footer>
-        <span>Faiza Rahman © 2025</span>
-        <span>Edmonton, AB</span>
+        <span>Faiza Rahman © 2026</span>
+        <span>Calgary, AB</span>
     </footer>
 
     <script>
@@ -210,9 +240,9 @@
 
         function copyEmail() {
             navigator.clipboard.writeText('faiza.rahman@ualberta.ca').then(() => {
-                const fb = document.getElementById('copyFeedback');
-                fb.classList.add('show');
-                setTimeout(() => fb.classList.remove('show'), 2000);
+                const fb = document.getElementById('copy-btn');
+                fb.textContent = "Copied";
+                setTimeout(() => fb.textContent = "Copy", 2000);
             });
         }
     </script>
