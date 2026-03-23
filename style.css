@@ -83,6 +83,7 @@ nav {
   text-transform: uppercase;
   color: var(--black);
   overflow: hidden;
+  padding: 0rem 2rem 0rem;
 }
 
 
@@ -223,10 +224,7 @@ nav {
   overflow: hidden;
   background: var(--white);
 }
-.disc-card:hover {
-  border-color: rgba(0, 0, 0, 0.3);
-  background: #ede9e1;
-}
+
 .disc-num {
   font-family: "DM Mono", monospace;
   font-size: 0.6rem;
@@ -271,9 +269,7 @@ nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 320px;
-  margin-bottom: 0.7rem;
-  gap: 0.7rem;
-  padding: 0 0.7rem;
+  padding: 1.6rem 2rem 2rem ;
 }
 
 .project-card {
@@ -371,7 +367,6 @@ nav {
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: var(--card-radius);
   padding: 2rem 2.2rem;
-  max-width: 500px;
 }
 .contact-card h3 {
   font-family: "DM Sans", sans-serif;
@@ -526,4 +521,10 @@ footer span {
   .nav-links {
     gap: 1.2rem;
   }
+  .project-row {
+
+  margin-bottom: 0.7rem;
+  gap: 0.7rem;
+  padding: 0 0.7rem;
+}
 }
