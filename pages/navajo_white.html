@@ -640,14 +640,16 @@
         <div class="stack-list">
           <span class="stack-pill hi">Django</span>
           <span class="stack-pill hi">Django REST Framework</span>
-          <span class="stack-pill hi">React</span>
+          <span class="stack-pill hi">HTMX</span>
           <span class="stack-pill">PostgreSQL</span>
           <span class="stack-pill">Python</span>
-          <span class="stack-pill">JavaScript / JSX</span>
-          <span class="stack-pill">REST / JSON</span>
+          <span class="stack-pill">JavaScript </span>
+          <span class="stack-pill">JSON</span>
           <span class="stack-pill">GitHub API</span>
           <span class="stack-pill">Heroku / Render</span>
           <span class="stack-pill">Git</span>
+          <span class="stack-pill">Figma</span>
+
         </div>
         <div class="hero-scroll">
           <div class="hero-scroll-line"></div>
@@ -748,14 +750,17 @@
         and delivered directly to the right person's
         inbox on whichever server they live on. It works a bit like email: you don't need to be on the same provider as
         someone to send them a message, you just need to know their address.
-</p><p>
-        The hardest part wasn't writing the code — it was working with five other teams who were building their own
+      </p>
+      <p>
+        <br>
+        The hardest part wasn't writing the code, it was working with five other teams who were building their own
         versions of the same system. When we sat down to connect our servers together, we found we'd all made slightly
         different assumptions about how things should be formatted. We had to negotiate a common standard mid-project
         and update our database structure without breaking everything that already worked.
-        On the front end, the challenge was taking all those messages arriving from different servers — each formatted
-        slightly differently — and turning them into a single, clean feed that just looks like a normal social media
-        timeline.</p>
+        On the front end, the challenge was taking all those messages arriving from different servers, each formatted
+        slightly differently, and turning them into a single, clean feed that just looks like a normal social media
+        timeline.
+      </p>
 
       <!-- Database Design -->
       <div class="process-block">
@@ -764,11 +769,10 @@
           <div>
             <p class="body-text">The database had to account for the fact that users live on different servers. Rather
               than copying everyone's profile data and keeping it up to date everywhere, we gave every person a
-              permanent web address that works
-              as their unique ID across the whole network, no matter which server you're on, that address always points
-              back to the right person.
-
-              The schema was designed around eight core models across 2 Django applications, AuthorApp and PostApp,
+              permanent web address that works as their unique ID across the whole network, no matter which server
+              you're on, that address always points
+              back to the right person. The schema was designed around eight core models across 2 Django applications,
+              AuthorApp and PostApp,
               ensuring clean handling of concerns across the local and remote boundary.
 
             </p>
@@ -794,11 +798,14 @@
           <div>
             <p class="body-text">Every action on the platform is represented
               as a typed JSON object and delivered by POST to the recipient's inbox endpoint via HTTP protocol. The
-              sending node is
-              responsible for routing public posts go to every follower's inbox, friends-only posts go to mutual
-              follows only. All nodes require administrators to initiate a handshake and verify each other via the API
+              sending node is responsible for routing public posts go to every follower's inbox, friends-only posts go
+              to mutual
+              follows only. All nodes require administrators to initiate a handshake and verify each other via the API.
+              This ensured only the necessary information was being shared across nodes and increased the users control
+              over who saw their account.
             </p>
-            <p class="body-text">The inbox endpoint is an append queue. No logic runs on delivery, objects are stored
+            <p class="body-text">The inbox endpoint is an append queue for each node. No logic runs on delivery, objects
+              are stored
               as-is and processed on read to reduce overhead. This keeps the receiving node passive and makes the system
               easier to reason about: each node only needs to trust its own data, not the correctness of remote
               processing.</p>
@@ -823,10 +830,20 @@
         <div class="process-heading">Front End</div>
         <div class="two-col" style="margin-top:0;">
           <div>
-            <p class="body-text">The stream is a merged view much like instagram. All posts, comments and likes are all
+            <p class="body-text"> Early on I created clean and flexible Figma prototypes to work towards. This lead the
+              groundwork for how we handled the user flow and Django Views. To reduce redundancy I created HTMX
+              templates. This decrease te umber of HTML files to maintain and simplified our workflow </p>
+
+            <p class="body-text">
+              The stream is a merged view much like instagram. All posts, comments and likes are all
               pulled together into a single chronological feed. Rather than surfacing raw events,
-              each object type renders as a notification feed item, a like appears as a post with its reaction context, a follow
-              request as an actionable card, keeping the experience readable without hiding activity and streamlining actionable items</p>
+              each object type renders as a notification feed item, a like appears as a post with its reaction context,
+              a follow request as an actionable card, keeping the experience readable without hiding activity and
+              streamlining
+              actionable items</p>
+
+            <p class="body-text">Overall, the aim was to create a user flow and interface that was familiar for our
+              users, while still being flexible enough to integrate the posts of other systems</p>
 
           </div>
           <div>
@@ -856,9 +873,12 @@
           <p class="feature-desc">Authors on any node can follow authors on any other node. The follow request is sent
             to the target node's inbox; acceptance is recorded locally. Unfollow events propagate the same way.</p>
           <svg class="corner-mark" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="7" cy="14" r="5" stroke="#0a0a0a" stroke-width="1.5" />
-            <circle cx="21" cy="14" r="5" stroke="#0a0a0a" stroke-width="1.5" />
-            <line x1="12" y1="14" x2="16" y2="14" stroke="#0a0a0a" stroke-width="1.5" />
+            <circle cx="7" cy="7" r="5" stroke="#0a0a0a" stroke-width="1.5" />
+            <circle cx="21" cy="7" r="5" stroke="#0a0a0a" stroke-width="1.5" />
+            <circle cx="14" cy="18" r="5" stroke="#0a0a0a" stroke-width="1.5" />
+            <line x1="12" y1="7" x2="16" y2="7" stroke="#0a0a0a" stroke-width="1.5" />
+            <line x1="18" y1="15" x2="20" y2="12" stroke="#0a0a0a" stroke-width="1.5" />
+
           </svg>
         </div>
         <div class="feature-card">
@@ -867,11 +887,15 @@
           <p class="feature-desc">Posts can be public (broadcast to all followers), friends-only (mutual follows),
             unlisted (linkable but undiscoverable), or private. Each tier routes to the correct inboxes with no manual
             filtering required on the receiver side.</p>
+          <svg class="corner-mark" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 14s4-7 12-7 12 7 12 7-4 7-12 7S2 14 2 14z" stroke="#0a0a0a" stroke-width="1.5" />
+            <circle cx="14" cy="14" r="3.5" stroke="#0a0a0a" stroke-width="1.5" />
+          </svg>
         </div>
         <div class="feature-card">
           <div class="feature-num">03</div>
           <div class="feature-title">Inbox Object Model</div>
-          <p class="feature-desc">Every action — post, like, comment, follow — is a typed JSON object POSTed to an inbox
+          <p class="feature-desc">Every action is a typed JSON object POSTed to an inbox
             endpoint. The inbox is a simple append queue; the stream view is a computed merge of inbox objects and
             locally-known public content.</p>
           <svg class="corner-mark" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -881,10 +905,19 @@
         </div>
         <div class="feature-card">
           <div class="feature-num">04</div>
-          <div class="feature-title">Cross-Node Likes &amp; Comments</div>
-          <p class="feature-desc">Reacting to a post on another node sends the like or comment object directly to the
-            post author's inbox. The author's node processes the event and records it against the correct entry, even
-            though the reactor lives elsewhere.</p>
+          <div class="feature-title">Higher User &amp; Admin Control</div>
+          <p class="feature-desc">Users gain greater control over the nodes and communities they engage with, while
+            administrators have enhanced oversight of their communities and increased authority to enforce custom rules.
+          </p>
+          <svg class="corner-mark" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="6" width="20" height="18" rx="2" stroke="#0a0a0a" stroke-width="1.5" />
+            <line x1="6" y1="10" x2="22" y2="10" stroke="#0a0a0a" stroke-width="1.5" />
+            <circle cx="10" cy="10" r="2" stroke="#0a0a0a" stroke-width="1.5" />
+            <line x1="6" y1="15" x2="22" y2="15" stroke="#0a0a0a" stroke-width="1.5" />
+            <circle cx="16" cy="15" r="2" stroke="#0a0a0a" stroke-width="1.5" />
+            <line x1="6" y1="20" x2="22" y2="20" stroke="#0a0a0a" stroke-width="1.5" />
+            <circle cx="12" cy="20" r="2" stroke="#0a0a0a" stroke-width="1.5" />
+          </svg>
         </div>
         <div class="feature-card">
           <div class="feature-num">05</div>
@@ -893,18 +926,24 @@
             local feed as native post objects. Followers receive these on their stream just like hand-authored entries.
           </p>
           <svg class="corner-mark" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="14" cy="14" r="9" stroke="#0a0a0a" stroke-width="1.4" />
-            <path d="M11 10c0-1.7 2.5-2.5 3 0 .3 1.5-.5 2.5-1 3v2" stroke="#0a0a0a" stroke-width="1.3"
-              stroke-linecap="round" />
-            <circle cx="13" cy="19" r=".8" fill="#0a0a0a" />
+            <path d="M14 3.5c-5.8 0-10.5 4.7-10.5 10.5 0 4.6 3 8.5 7.2 9.9.5.1.7-.2.7-.5v-1.8c-2.9.6-3.5-1.2-3.5-1.2-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1.6 1.7 2.9 1.7.3-.7.4-1.1.8-1.4-2.3-.3-4.7-1.2-4.7-5.2 0-1.1.4-2 1.1-2.7-.1-.3-.5-1.4.1-2.8 0 0 .9-.3 2.9 1.1.8-.2 1.7-.3 2.6-.3s1.8.1 2.6.3c2-1.4 2.9-1.1 2.9-1.1.6 1.4.2 2.5.1 2.8.7.7 1.1 1.6 1.1 2.7 0 4-2.4 4.9-4.7 5.2.4.3.8 1 .8 2v3c0 .3.2.6.7.5 4.2-1.4 7.2-5.3 7.2-9.9C24.5 8.2 19.8 3.5 14 3.5z"
+        stroke="#0a0a0a"
+        stroke-width="1.2"
+        stroke-linejoin="round"/>
           </svg>
+
         </div>
         <div class="feature-card">
           <div class="feature-num">06</div>
           <div class="feature-title">Image &amp; Linked Media Entries</div>
-          <p class="feature-desc">Authors can publish unlisted image entries and reference them from text posts —
+          <p class="feature-desc">Authors can publish unlisted image entries and reference them from text posts,
             enabling rich media posts without hosting images inline. The image URL is stable and dereferenceable across
             nodes.</p>
+          <svg class="corner-mark" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="6" width="14" height="12" rx="2" stroke="#0a0a0a" stroke-width="1.5" />
+            <circle cx="9" cy="10" r="1.5" fill="#0a0a0a" />
+            <path d="M6 16l4-3 3 2 3-3 2 2" stroke="#0a0a0a" stroke-width="1.5" />
+          </svg>
         </div>
       </div>
     </div>
@@ -918,8 +957,8 @@
 
       <div class="two-col" style="margin-top:2.5rem;">
         <div>
-          <p class="body-text">The hardest engineering problem was schema alignment. Each of the five external nodes
-            evolved their API subtly differently — field names drifted, optional fields became required, date formats
+          <p class="body-text">The hardest engineering problem was schema alignment. Each of the five external teams
+            evolved their API subtly differently, field names drifted, optional fields became required, date formats
             shifted. Robust cross-node integration required writing adaptive serializers that could handle multiple
             payload shapes for the same object type.</p>
           <p class="body-text">Working against live external systems also meant debugging failures with no stack traces.
@@ -928,7 +967,7 @@
             the user.</p>
           <div class="callout">
             <div class="callout-label">Key Takeaway</div>
-            <p>Building a distributed system taught me that the hardest problems aren't algorithmic — they're
+            <p>Building a distributed system taught me that the hardest problems aren't algorithmic, they're
               coordination problems. Clear API contracts, consistent data shapes, and defensive ingestion logic matter
               far more than clever code.</p>
           </div>
@@ -936,8 +975,8 @@
         <div>
           <p class="body-text">On the product side, designing the stream experience surfaced interesting UX questions
             unique to federation. When content arrives from a node that is temporarily offline, how do you signal
-            provenance? When a like is sent but delivery fails, should it retry silently or surface an error? These
-            aren't hypothetical edge cases — they happened in every demo.</p>
+            origin? When a like is sent but delivery fails, should it retry silently or surface an error? These
+            aren't hypothetical edge cases, they happened in every demo.</p>
           <p class="body-text">The project gave me hands-on experience with the architecture that underpins real
             federated platforms like Mastodon, and a much stronger intuition for REST API design, distributed data
             ownership, and the tradeoffs between consistency and availability in a system with no central coordinator.
