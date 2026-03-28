@@ -685,7 +685,8 @@
       <div class="two-col" style="margin-top:3rem;">
         <div>
           <p class="body-text">NavajoWhite is a federated blogging and social platform built on an inbox-push model,
-            inspired by Mastodon and the modern fediverse. Each team operated an independent codebases each communicating by
+            inspired by Mastodon and the modern fediverse. Each team operated an independent codebases each
+            communicating by
             pushing entries, likes, comments, and follow events directly to the inbox of the target author's node.</p>
           <p class="body-text"><strong>For users:</strong> data sovereignty means your content lives on the node you
             chose, not a platform you don't control. Censorship resistance follows naturally: a post removed on one node
@@ -740,30 +741,49 @@
     <div class="container">
       <p class="section-label">02 — Process</p>
       <h2 class="h2">How it was <span class="u">built</span></h2>
+      <p>Building a social network where no single person is in charge sounds simple, but it creates an immediate
+        problem: how do you get completely <b>separate systems, built by different teams</b>, to talk to each other
+        reliably?
+        We solved this with a shared rulebook. Every action on the platform gets packaged into a small, labelled message
+        and delivered directly to the right person's
+        inbox on whichever server they live on. It works a bit like email: you don't need to be on the same provider as
+        someone to send them a message, you just need to know their address.
+</p><p>
+        The hardest part wasn't writing the code — it was working with five other teams who were building their own
+        versions of the same system. When we sat down to connect our servers together, we found we'd all made slightly
+        different assumptions about how things should be formatted. We had to negotiate a common standard mid-project
+        and update our database structure without breaking everything that already worked.
+        On the front end, the challenge was taking all those messages arriving from different servers — each formatted
+        slightly differently — and turning them into a single, clean feed that just looks like a normal social media
+        timeline.</p>
 
       <!-- Database Design -->
       <div class="process-block">
         <div class="process-heading">Database Design</div>
         <div class="two-col" style="margin-top:0;">
           <div>
-            <p class="body-text">The schema was designed around eight core models across 3 Django applications.: Node,
-              User, Post, Comment, Like, Follow, and Friend.User handles authentication while Author carries the
-              public-facing identity and federation data, keeping concerns clean across the local and remote boundary.
+            <p class="body-text">The database had to account for the fact that users live on different servers. Rather
+              than copying everyone's profile data and keeping it up to date everywhere, we gave every person a
+              permanent web address that works
+              as their unique ID across the whole network, no matter which server you're on, that address always points
+              back to the right person.
+
+              The schema was designed around eight core models across 2 Django applications, AuthorApp and PostApp,
+              ensuring clean handling of concerns across the local and remote boundary.
+
             </p>
             <p class="body-text">The trickiest design problem was representing remote authors. Rather than duplicating
               profile data from other nodes, each remote author is identified by a composite URL built from their home
               node's identifier and username. This gave us a stable, dereferenceable key for cross-node references
               without the consistency problems that come from copying data you don't own.</p>
           </div>
-          <div>
-            <div class="callout">
-              <div class="callout-label">Mid-Project Restructure</div>
-              <p>A significant schema restructure was necessary after cross-team API discussions surfaced
-                incompatibilities in how nodes were modelling shared objects. Coordinating that migration across an
-                active codebase — without breaking existing endpoints — was one of the more demanding parts of the
-                project.</p>
-            </div>
+          <div class="mxgraph" style="max-width:100%;border:1px solid transparent;"
+            data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; agent=\&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36\&quot; version=\&quot;29.6.6\&quot;&gt;&lt;diagram name=\&quot;Page-1\&quot; id=\&quot;MkNOcvu6mG7EPBe59nUr\&quot;&gt;&lt;mxGraphModel dx=\&quot;992\&quot; dy=\&quot;502\&quot; grid=\&quot;1\&quot; gridSize=\&quot;10\&quot; guides=\&quot;1\&quot; tooltips=\&quot;1\&quot; connect=\&quot;1\&quot; arrows=\&quot;1\&quot; fold=\&quot;1\&quot; page=\&quot;1\&quot; pageScale=\&quot;1\&quot; pageWidth=\&quot;850\&quot; pageHeight=\&quot;1100\&quot; math=\&quot;0\&quot; shadow=\&quot;0\&quot;&gt;&lt;root&gt;&lt;mxCell id=\&quot;0\&quot;/&gt;&lt;mxCell id=\&quot;1\&quot; parent=\&quot;0\&quot;/&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-9\&quot; parent=\&quot;1\&quot; style=\&quot;shape=table;startSize=84;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=1;fontStyle=1;align=center;resizeLast=1;swimlaneLine=1;labelBackgroundColor=none;backgroundOutline=0;fillColor=none;\&quot; value=\&quot;NODE\&quot; vertex=\&quot;1\&quot;&gt;&lt;mxGeometry height=\&quot;84\&quot; width=\&quot;100\&quot; x=\&quot;487\&quot; y=\&quot;100\&quot; as=\&quot;geometry\&quot;/&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-10\&quot; parent=\&quot;1\&quot; style=\&quot;shape=table;startSize=84;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=1;fontStyle=1;align=center;resizeLast=1;swimlaneLine=1;labelBackgroundColor=none;backgroundOutline=0;fillColor=none;\&quot; value=\&quot;USER\&quot; vertex=\&quot;1\&quot;&gt;&lt;mxGeometry height=\&quot;84\&quot; width=\&quot;100\&quot; x=\&quot;487\&quot; y=\&quot;245\&quot; as=\&quot;geometry\&quot;/&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-11\&quot; parent=\&quot;1\&quot; style=\&quot;shape=table;startSize=84;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=1;fontStyle=1;align=center;resizeLast=1;swimlaneLine=1;labelBackgroundColor=none;backgroundOutline=0;fillColor=none;\&quot; value=\&quot;POST\&quot; vertex=\&quot;1\&quot;&gt;&lt;mxGeometry height=\&quot;84\&quot; width=\&quot;100\&quot; x=\&quot;870\&quot; y=\&quot;245\&quot; as=\&quot;geometry\&quot;/&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-12\&quot; parent=\&quot;1\&quot; style=\&quot;shape=table;startSize=84;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=1;fontStyle=1;align=center;resizeLast=1;swimlaneLine=1;labelBackgroundColor=none;backgroundOutline=0;fillColor=none;\&quot; value=\&quot;AUTHOR_PROFILE\&quot; vertex=\&quot;1\&quot;&gt;&lt;mxGeometry height=\&quot;84\&quot; width=\&quot;167\&quot; x=\&quot;453.5\&quot; y=\&quot;390\&quot; as=\&quot;geometry\&quot;/&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-13\&quot; parent=\&quot;1\&quot; style=\&quot;shape=table;startSize=84;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=1;fontStyle=1;align=center;resizeLast=1;swimlaneLine=1;labelBackgroundColor=none;backgroundOutline=0;fillColor=none;fillStyle=hatch;rounded=0;arcSize=50;\&quot; value=\&quot;COMMENT\&quot; vertex=\&quot;1\&quot;&gt;&lt;mxGeometry height=\&quot;84\&quot; width=\&quot;111\&quot; x=\&quot;869.5\&quot; y=\&quot;390\&quot; as=\&quot;geometry\&quot;/&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-15\&quot; parent=\&quot;1\&quot; style=\&quot;shape=table;startSize=84;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=1;fontStyle=1;align=center;resizeLast=1;swimlaneLine=1;labelBackgroundColor=none;backgroundOutline=0;fillColor=none;\&quot; value=\&quot;COMMENT_LIKE\&quot; vertex=\&quot;1\&quot;&gt;&lt;mxGeometry height=\&quot;84\&quot; width=\&quot;150\&quot; x=\&quot;850\&quot; y=\&quot;550\&quot; as=\&quot;geometry\&quot;/&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-16\&quot; parent=\&quot;1\&quot; style=\&quot;shape=table;startSize=84;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=1;fontStyle=1;align=center;resizeLast=1;swimlaneLine=1;labelBackgroundColor=none;backgroundOutline=0;fillColor=none;\&quot; value=\&quot;FOLLOWER\&quot; vertex=\&quot;1\&quot;&gt;&lt;mxGeometry height=\&quot;84\&quot; width=\&quot;118\&quot; x=\&quot;240\&quot; y=\&quot;390\&quot; as=\&quot;geometry\&quot;/&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-17\&quot; parent=\&quot;1\&quot; style=\&quot;shape=table;startSize=84;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=1;fontStyle=1;align=center;resizeLast=1;swimlaneLine=1;labelBackgroundColor=none;backgroundOutline=0;fillColor=none;\&quot; value=\&quot;FRIENDS\&quot; vertex=\&quot;1\&quot;&gt;&lt;mxGeometry height=\&quot;84\&quot; width=\&quot;98\&quot; x=\&quot;425\&quot; y=\&quot;550\&quot; as=\&quot;geometry\&quot;/&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-18\&quot; parent=\&quot;1\&quot; style=\&quot;shape=table;startSize=84;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=1;fontStyle=1;align=center;resizeLast=1;swimlaneLine=1;labelBackgroundColor=none;backgroundOutline=0;fillColor=none;\&quot; value=\&quot;NOTIFICATION\&quot; vertex=\&quot;1\&quot;&gt;&lt;mxGeometry height=\&quot;84\&quot; width=\&quot;140\&quot; x=\&quot;534\&quot; y=\&quot;550\&quot; as=\&quot;geometry\&quot;/&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-19\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;lJ_tVvvMzTCrTDT3ZjWH-9\&quot; style=\&quot;startArrow=ERmandOne;startSize=10;;endArrow=ERzeroToMany;endSize=10;;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;exitDx=0;exitDy=0;swimlaneLine=1;labelBackgroundColor=none;fontColor=default;backgroundOutline=0;\&quot; target=\&quot;lJ_tVvvMzTCrTDT3ZjWH-10\&quot; value=\&quot;local_node\&quot;&gt;&lt;mxGeometry relative=\&quot;1\&quot; x=\&quot;-0.1475\&quot; y=\&quot;33\&quot; as=\&quot;geometry\&quot;&gt;&lt;mxPoint as=\&quot;offset\&quot;/&gt;&lt;/mxGeometry&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-20\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;lJ_tVvvMzTCrTDT3ZjWH-9\&quot; style=\&quot;startArrow=ERmandOne;startSize=10;;endArrow=ERzeroToMany;endSize=10;;exitX=1;exitY=0.67;entryX=0.41;entryY=0;rounded=0;swimlaneLine=1;labelBackgroundColor=none;fontColor=default;backgroundOutline=0;\&quot; target=\&quot;lJ_tVvvMzTCrTDT3ZjWH-11\&quot; value=\&quot;hosted on\&quot;&gt;&lt;mxGeometry relative=\&quot;1\&quot; x=\&quot;0.1613\&quot; y=\&quot;18\&quot; as=\&quot;geometry\&quot;&gt;&lt;mxPoint as=\&quot;offset\&quot;/&gt;&lt;/mxGeometry&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-21\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;lJ_tVvvMzTCrTDT3ZjWH-10\&quot; style=\&quot;curved=1;startArrow=ERmandOne;startSize=10;;endArrow=ERmandOne;endSize=10;;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;swimlaneLine=1;labelBackgroundColor=none;fontColor=default;backgroundOutline=0;\&quot; target=\&quot;lJ_tVvvMzTCrTDT3ZjWH-12\&quot; value=\&quot;\&quot;&gt;&lt;mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot;&gt;&lt;Array as=\&quot;points\&quot;/&gt;&lt;/mxGeometry&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-22\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;lJ_tVvvMzTCrTDT3ZjWH-12\&quot; style=\&quot;startArrow=ERmandOne;startSize=10;;endArrow=ERzeroToMany;endSize=10;;exitX=1;exitY=0;entryX=0;entryY=0.25;rounded=0;entryDx=0;entryDy=0;exitDx=0;exitDy=0;swimlaneLine=1;labelBackgroundColor=none;fontColor=default;backgroundOutline=0;\&quot; target=\&quot;lJ_tVvvMzTCrTDT3ZjWH-11\&quot; value=\&quot;writes\&quot;&gt;&lt;mxGeometry relative=\&quot;1\&quot; x=\&quot;-0.0725\&quot; y=\&quot;14\&quot; as=\&quot;geometry\&quot;&gt;&lt;mxPoint as=\&quot;offset\&quot;/&gt;&lt;/mxGeometry&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-23\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;lJ_tVvvMzTCrTDT3ZjWH-14\&quot; style=\&quot;startArrow=ERmandOne;startSize=10;;endArrow=ERzeroToMany;endSize=10;;exitX=1;exitY=0.75;entryX=0;entryY=0.75;rounded=0;entryDx=0;entryDy=0;exitDx=0;exitDy=0;swimlaneLine=1;labelBackgroundColor=none;fontColor=default;backgroundOutline=0;\&quot; target=\&quot;lJ_tVvvMzTCrTDT3ZjWH-13\&quot; value=\&quot;writes\&quot;&gt;&lt;mxGeometry relative=\&quot;1\&quot; x=\&quot;0.0063\&quot; y=\&quot;13\&quot; as=\&quot;geometry\&quot;&gt;&lt;mxPoint as=\&quot;offset\&quot;/&gt;&lt;/mxGeometry&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-24\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;lJ_tVvvMzTCrTDT3ZjWH-12\&quot; style=\&quot;startArrow=ERmandOne;startSize=10;;endArrow=ERzeroToMany;endSize=10;;exitX=1;exitY=0.25;rounded=0;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;swimlaneLine=1;labelBackgroundColor=none;fontColor=default;backgroundOutline=0;\&quot; target=\&quot;lJ_tVvvMzTCrTDT3ZjWH-14\&quot; value=\&quot;likes\&quot;&gt;&lt;mxGeometry relative=\&quot;1\&quot; x=\&quot;0.1367\&quot; y=\&quot;11\&quot; as=\&quot;geometry\&quot;&gt;&lt;mxPoint as=\&quot;offset\&quot;/&gt;&lt;/mxGeometry&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-25\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;lJ_tVvvMzTCrTDT3ZjWH-12\&quot; style=\&quot;startArrow=ERmandOne;startSize=10;;endArrow=ERzeroToMany;endSize=10;;exitX=1;exitY=1;entryX=0;entryY=0.38;rounded=0;exitDx=0;exitDy=0;swimlaneLine=1;labelBackgroundColor=none;fontColor=default;backgroundOutline=0;textShadow=0;\&quot; target=\&quot;lJ_tVvvMzTCrTDT3ZjWH-15\&quot; value=\&quot;likes\&quot;&gt;&lt;mxGeometry relative=\&quot;1\&quot; x=\&quot;0.0786\&quot; y=\&quot;13\&quot; as=\&quot;geometry\&quot;&gt;&lt;mxPoint as=\&quot;offset\&quot;/&gt;&lt;/mxGeometry&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-26\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;lJ_tVvvMzTCrTDT3ZjWH-12\&quot; style=\&quot;startArrow=ERmandOne;startSize=10;;endArrow=ERzeroToMany;endSize=10;;exitX=0;exitY=0.75;entryX=1;entryY=0.75;rounded=0;entryDx=0;entryDy=0;exitDx=0;exitDy=0;swimlaneLine=1;labelBackgroundColor=none;fontColor=default;backgroundOutline=0;\&quot; target=\&quot;lJ_tVvvMzTCrTDT3ZjWH-16\&quot; value=\&quot;actor\&quot;&gt;&lt;mxGeometry relative=\&quot;1\&quot; x=\&quot;-0.089\&quot; y=\&quot;-13\&quot; as=\&quot;geometry\&quot;&gt;&lt;mxPoint as=\&quot;offset\&quot;/&gt;&lt;/mxGeometry&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-27\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;lJ_tVvvMzTCrTDT3ZjWH-12\&quot; style=\&quot;startArrow=ERmandOne;startSize=10;;endArrow=ERzeroToMany;endSize=10;;entryX=1;entryY=0.25;rounded=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryDx=0;entryDy=0;swimlaneLine=1;labelBackgroundColor=none;fontColor=default;backgroundOutline=0;\&quot; target=\&quot;lJ_tVvvMzTCrTDT3ZjWH-16\&quot; value=\&quot;object\&quot;&gt;&lt;mxGeometry relative=\&quot;1\&quot; x=\&quot;-0.089\&quot; y=\&quot;-11\&quot; as=\&quot;geometry\&quot;&gt;&lt;mxPoint as=\&quot;offset\&quot;/&gt;&lt;Array as=\&quot;points\&quot;/&gt;&lt;mxPoint x=\&quot;450\&quot; y=\&quot;390\&quot; as=\&quot;sourcePoint\&quot;/&gt;&lt;/mxGeometry&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-28\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;lJ_tVvvMzTCrTDT3ZjWH-12\&quot; style=\&quot;startArrow=ERmandOne;startSize=10;;endArrow=ERzeroToMany;endSize=10;;entryX=0.75;entryY=0;rounded=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryDx=0;entryDy=0;swimlaneLine=1;labelBackgroundColor=none;fontColor=default;backgroundOutline=0;\&quot; target=\&quot;lJ_tVvvMzTCrTDT3ZjWH-17\&quot; value=\&quot;\&quot;&gt;&lt;mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot;/&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-30\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;lJ_tVvvMzTCrTDT3ZjWH-11\&quot; style=\&quot;startArrow=ERmandOne;startSize=10;;endArrow=ERzeroToMany;endSize=10;;exitX=0.639;exitY=1.005;entryX=0.56;entryY=0;rounded=0;exitDx=0;exitDy=0;exitPerimeter=0;swimlaneLine=1;labelBackgroundColor=none;fontColor=default;backgroundOutline=0;\&quot; target=\&quot;lJ_tVvvMzTCrTDT3ZjWH-13\&quot; value=\&quot;has\&quot;&gt;&lt;mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot;/&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-31\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;lJ_tVvvMzTCrTDT3ZjWH-11\&quot; style=\&quot;startArrow=ERmandOne;startSize=10;;endArrow=ERzeroToMany;endSize=10;;exitX=0;exitY=0.75;entryX=0.804;entryY=-0.033;rounded=0;exitDx=0;exitDy=0;entryDx=0;entryDy=0;entryPerimeter=0;swimlaneLine=1;labelBackgroundColor=none;fontColor=default;backgroundOutline=0;\&quot; target=\&quot;lJ_tVvvMzTCrTDT3ZjWH-14\&quot; value=\&quot;\&quot;&gt;&lt;mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot;/&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-32\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;lJ_tVvvMzTCrTDT3ZjWH-13\&quot; style=\&quot;startArrow=ERmandOne;startSize=10;;endArrow=ERzeroToMany;endSize=10;;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;entryDx=0;entryDy=0;swimlaneLine=1;labelBackgroundColor=none;fontColor=default;backgroundOutline=0;\&quot; target=\&quot;lJ_tVvvMzTCrTDT3ZjWH-15\&quot; value=\&quot;\&quot;&gt;&lt;mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot;/&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-33\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;lJ_tVvvMzTCrTDT3ZjWH-12\&quot; style=\&quot;startArrow=ERmandOne;startSize=10;;endArrow=ERzeroToMany;endSize=10;;exitX=1;exitY=0.75;entryX=0;entryY=0.75;rounded=0;entryDx=0;entryDy=0;exitDx=0;exitDy=0;swimlaneLine=1;labelBackgroundColor=none;fontColor=default;backgroundOutline=0;\&quot; target=\&quot;lJ_tVvvMzTCrTDT3ZjWH-14\&quot; value=\&quot;\&quot;&gt;&lt;mxGeometry relative=\&quot;1\&quot; as=\&quot;geometry\&quot;&gt;&lt;mxPoint x=\&quot;620\&quot; y=\&quot;445\&quot; as=\&quot;sourcePoint\&quot;/&gt;&lt;mxPoint x=\&quot;1103\&quot; y=\&quot;428\&quot; as=\&quot;targetPoint\&quot;/&gt;&lt;/mxGeometry&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-14\&quot; parent=\&quot;1\&quot; style=\&quot;shape=table;startSize=84;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=1;fontStyle=1;align=center;resizeLast=1;swimlaneLine=1;labelBackgroundColor=none;backgroundOutline=0;fillColor=none;\&quot; value=\&quot;LIKE\&quot; vertex=\&quot;1\&quot;&gt;&lt;mxGeometry height=\&quot;84\&quot; width=\&quot;100\&quot; x=\&quot;690\&quot; y=\&quot;390\&quot; as=\&quot;geometry\&quot;/&gt;&lt;/mxCell&gt;&lt;mxCell id=\&quot;lJ_tVvvMzTCrTDT3ZjWH-29\&quot; edge=\&quot;1\&quot; parent=\&quot;1\&quot; source=\&quot;lJ_tVvvMzTCrTDT3ZjWH-12\&quot; style=\&quot;startArrow=ERmandOne;startSize=10;;endArrow=ERzeroToMany;endSize=10;;exitX=0.75;exitY=1;rounded=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;exitDx=0;exitDy=0;swimlaneLine=1;labelBackgroundColor=none;fontColor=default;backgroundOutline=0;\&quot; target=\&quot;lJ_tVvvMzTCrTDT3ZjWH-18\&quot; value=\&quot;receives\&quot;&gt;&lt;mxGeometry relative=\&quot;1\&quot; x=\&quot;-0.1718\&quot; y=\&quot;36\&quot; as=\&quot;geometry\&quot;&gt;&lt;mxPoint as=\&quot;offset\&quot;/&gt;&lt;mxPoint x=\&quot;604\&quot; y=\&quot;473.9999999999998\&quot; as=\&quot;targetPoint\&quot;/&gt;&lt;/mxGeometry&gt;&lt;/mxCell&gt;&lt;/root&gt;&lt;/mxGraphModel&gt;&lt;/diagram&gt;&lt;/mxfile&gt;&quot;,&quot;toolbar&quot;:&quot;pages zoom layers lightbox&quot;,&quot;page&quot;:0}">
           </div>
+
+
+
+
         </div>
       </div>
 
@@ -772,22 +792,29 @@
         <div class="process-heading">Inbox-Push Model</div>
         <div class="two-col" style="margin-top:0;">
           <div>
-            <p class="body-text">Every action on the platform — posts, likes, comments, follow requests — is represented
-              as a typed JSON object and delivered by POST to the recipient's inbox endpoint. The sending node is
-              responsible for routing: public posts go to every follower's inbox, friends-only posts go to mutual
-              follows only.</p>
-            <p class="body-text">The inbox endpoint is an append queue. No logic runs on delivery — objects are stored
-              as-is and processed on read. This keeps the receiving node passive and makes the system easier to reason
-              about: each node only needs to trust its own data, not the correctness of remote processing.</p>
+            <p class="body-text">Every action on the platform is represented
+              as a typed JSON object and delivered by POST to the recipient's inbox endpoint via HTTP protocol. The
+              sending node is
+              responsible for routing public posts go to every follower's inbox, friends-only posts go to mutual
+              follows only. All nodes require administrators to initiate a handshake and verify each other via the API
+            </p>
+            <p class="body-text">The inbox endpoint is an append queue. No logic runs on delivery, objects are stored
+              as-is and processed on read to reduce overhead. This keeps the receiving node passive and makes the system
+              easier to reason about: each node only needs to trust its own data, not the correctness of remote
+              processing.</p>
           </div>
           <div>
-            <div class="callout">
-              <div class="callout-label">Why This Model</div>
-              <p>Separating delivery from processing meant a slow or misbehaving remote node couldn't corrupt local
-                state. It also made integration testing straightforward — we could POST fixture objects directly to an
-                inbox without needing a live remote node to generate them.</p>
+            <div>
+              <div class="callout">
+                <div class="callout-label">Mid-Project Restructure</div>
+                <p>A significant schema restructure was necessary after cross-team API discussions surfaced
+                  incompatibilities in how nodes were modelling shared objects. Coordinating that migration across an
+                  active codebase without breaking existing endpoints was one of the more demanding parts of the
+                  project.</p>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
 
@@ -796,12 +823,11 @@
         <div class="process-heading">Front End</div>
         <div class="two-col" style="margin-top:0;">
           <div>
-            <p class="body-text">The stream is a merged view: inbox objects, local public posts, follow requests, likes,
-              and comments are all pulled together into a single chronological feed. Rather than surfacing raw events,
-              each object type renders as a feed item — a like appears as a post with its reaction context, a follow
-              request as an actionable card — keeping the experience readable without hiding activity.</p>
-            <p class="body-text">The inbox UI followed the same principle: clarity over completeness. Notifications are
-              grouped by type and rendered with enough context to act on without clicking through.</p>
+            <p class="body-text">The stream is a merged view much like instagram. All posts, comments and likes are all
+              pulled together into a single chronological feed. Rather than surfacing raw events,
+              each object type renders as a notification feed item, a like appears as a post with its reaction context, a follow
+              request as an actionable card, keeping the experience readable without hiding activity and streamlining actionable items</p>
+
           </div>
           <div>
             <div class="callout">
@@ -940,7 +966,9 @@
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 60);
     });
+
   </script>
+  <script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
 
 </body>
 
