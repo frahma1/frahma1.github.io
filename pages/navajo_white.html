@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+<!---TODO
+-seperate css
+-diagrams
+-mockups
+-add more detail
+  -prototypesing
+  - user flows
+  - documantation swagger
+  - hosting on heroku
+  - final product-->
 
 <head>
   <meta charset="UTF-8">
@@ -9,593 +19,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap">
-  <style>
-    :root {
-      --bg: #f5f2ed;
-      --ink: #0a0a0a;
-      --ink-mid: #3a3a3a;
-      --ink-faint: #8a8580;
-      --accent: #C8F135;
-      --accent-dk: #9ebc28;
-      --card-bg: #efece6;
-      --border: rgba(10, 10, 10, .10);
-      --f-display: 'Barlow Condensed', sans-serif;
-      --f-mono: 'DM Mono', monospace;
-      --f-body: 'DM Sans', sans-serif;
-    }
+  <link rel="stylesheet" href="project.css">
 
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--ink);
-      font-family: var(--f-body);
-      font-size: 16px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    .svg-defs {
-      position: absolute;
-      width: 0;
-      height: 0;
-      overflow: hidden;
-    }
-
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 clamp(1.5rem, 5vw, 4rem);
-      height: 64px;
-      background: transparent;
-      transition: background .3s, border-bottom .3s;
-    }
-
-    nav.scrolled {
-      background: rgba(245, 242, 237, .92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-back {
-      font-family: var(--f-mono);
-      font-size: .78rem;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--ink-mid);
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-      transition: color .2s;
-    }
-
-    .nav-back:hover {
-      color: var(--ink);
-    }
-
-    .nav-back svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      font-family: var(--f-mono);
-      font-size: .75rem;
-      letter-spacing: .07em;
-      text-transform: uppercase;
-      color: var(--ink-mid);
-    }
-
-    .nav-links a {
-      position: relative;
-      padding-bottom: 2px;
-      transition: color .2s;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 100%;
-      height: 1px;
-      background: var(--accent);
-      transition: right .25s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--ink);
-    }
-
-    .nav-links a:hover::after {
-      right: 0;
-    }
-
-    @media (max-width: 560px) {
-      .nav-links {
-        display: none;
-      }
-    }
-
-    .hero {
-      min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 clamp(1.5rem, 7vw, 6rem) clamp(3rem, 7vh, 5rem);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-eyebrow {
-      font-family: var(--f-mono);
-      font-size: .75rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 1.2rem;
-    }
-
-    .hero-title {
-      font-family: var(--f-display);
-      font-size: clamp(4.5rem, 13vw, 11rem);
-      font-weight: 800;
-      line-height: .92;
-      letter-spacing: -.02em;
-      text-transform: uppercase;
-      position: relative;
-      display: inline-block;
-    }
-
-    .hero-title .mark-underline {
-      position: absolute;
-      bottom: -.12em;
-      left: -.02em;
-      width: calc(100% + .04em);
-      overflow: visible;
-      pointer-events: none;
-    }
-
-    .hero-title .mark-underline path {
-      stroke: var(--accent);
-      stroke-width: 6;
-      fill: none;
-      stroke-linecap: round;
-      stroke-dasharray: 900;
-      stroke-dashoffset: 900;
-      animation: draw-underline 1.1s cubic-bezier(.4, 0, .2, 1) .4s forwards;
-      filter: url(#grease);
-    }
-
-    @keyframes draw-underline {
-      to {
-        stroke-dashoffset: 0;
-      }
-    }
-
-    .hero-meta {
-      margin-top: clamp(1.5rem, 3vh, 2.5rem);
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-    }
-
-    .hero-scroll {
-      font-family: var(--f-mono);
-      font-size: .7rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-    }
-
-    .hero-scroll-line {
-      width: 40px;
-      height: 1px;
-      background: var(--ink-faint);
-      animation: scroll-nudge 2s ease-in-out infinite;
-    }
-
-    @keyframes scroll-nudge {
-
-      0%,
-      100% {
-        width: 40px;
-        opacity: 1;
-      }
-
-      50% {
-        width: 60px;
-        opacity: .5;
-      }
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 clamp(1.5rem, 5vw, 4rem);
-    }
-
-    .section {
-      padding: clamp(4rem, 8vh, 7rem) 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .section-label {
-      font-family: var(--f-mono);
-      font-size: .7rem;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 1.4rem;
-      display: flex;
-      align-items: center;
-      gap: .8rem;
-    }
-
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .h2 {
-      font-family: var(--f-display);
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
-      font-weight: 700;
-      line-height: 1.0;
-      letter-spacing: -.01em;
-      text-transform: uppercase;
-      position: relative;
-      display: inline-block;
-    }
-
-    .h2 .u {
-      position: relative;
-      display: inline-block;
-    }
-
-    .h2 .u::after {
-      content: '';
-      position: absolute;
-      bottom: -.006em;
-      left: -.04em;
-      right: -.04em;
-      height: 3px;
-      background: var(--accent);
-      border-radius: 1px;
-    }
-
-    .overview-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-top: 2.5rem;
-    }
-
-    .overview-cell {
-      background: var(--bg);
-      padding: 1.75rem 1.5rem;
-    }
-
-    .overview-cell .label {
-      font-family: var(--f-mono);
-      font-size: .68rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: .6rem;
-    }
-
-    .overview-cell .value {
-      font-family: var(--f-body);
-      font-size: .9rem;
-      font-weight: 500;
-      color: var(--ink);
-      line-height: 1.4;
-    }
-
-    @media (max-width: 700px) {
-      .overview-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 420px) {
-      .overview-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .body-text {
-      font-size: clamp(.92rem, 1.6vw, 1.05rem);
-      line-height: 1.75;
-      color: var(--ink-mid);
-      max-width: 68ch;
-    }
-
-    .body-text+.body-text {
-      margin-top: 1.2em;
-    }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(2rem, 4vw, 4rem);
-      align-items: start;
-      margin-top: 2.5rem;
-    }
-
-    @media (max-width: 700px) {
-      .two-col {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .callout {
-      border-left: 3px solid var(--accent);
-      padding: 1.5rem 1.75rem;
-      background: var(--card-bg);
-      margin-top: 2rem;
-    }
-
-    .callout-label {
-      font-family: var(--f-mono);
-      font-size: .68rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--accent-dk);
-      margin-bottom: .5rem;
-    }
-
-    .callout p {
-      font-size: .95rem;
-      line-height: 1.7;
-      color: var(--ink-mid);
-    }
-
-    .stat-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 3rem;
-      margin-top: 2.5rem;
-    }
-
-    .stat-number {
-      font-family: var(--f-display);
-      font-size: clamp(2.8rem, 5vw, 4rem);
-      font-weight: 800;
-      line-height: 1;
-      letter-spacing: -.02em;
-      position: relative;
-      display: inline-block;
-    }
-
-    .stat-number.circled {
-      position: relative;
-    }
-
-    .stat-number.circled .scribble-circle {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 140%;
-      height: 140%;
-      pointer-events: none;
-      overflow: visible;
-    }
-
-    .stat-number.circled .scribble-circle path {
-      fill: none;
-      stroke: var(--accent);
-      stroke-width: 3;
-      stroke-linecap: round;
-      filter: url(#grease);
-      stroke-dasharray: 500;
-      stroke-dashoffset: 500;
-      animation: draw-circle 1.2s ease .8s forwards;
-    }
-
-    @keyframes draw-circle {
-      to {
-        stroke-dashoffset: 0;
-      }
-    }
-
-    .stat-label {
-      font-family: var(--f-mono);
-      font-size: .72rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-top: .3rem;
-    }
-
-    .stack-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .5rem;
-    }
-
-    .stack-pill {
-      font-family: var(--f-mono);
-      font-size: .72rem;
-      letter-spacing: .07em;
-      text-transform: uppercase;
-      padding: .4rem .9rem;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      color: var(--ink-mid);
-      border-radius: 2px;
-    }
-
-    .stack-pill.hi {
-      background: var(--accent);
-      color: var(--ink);
-      border-color: var(--accent);
-    }
-
-    /* ─── PROCESS ─────────────────────────────────────────── */
-    .process-block {
-      margin-top: 4rem;
-    }
-
-    .process-heading {
-      font-family: var(--f-display);
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .01em;
-      margin-bottom: 1.75rem;
-      padding-bottom: .75rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    /* ─── FEATURES ────────────────────────────────────────── */
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-top: 2.5rem;
-    }
-
-    .feature-card {
-      background: var(--bg);
-      padding: 2rem 1.75rem;
-      transition: background .2s;
-      position: relative;
-    }
-
-    .feature-card:hover {
-      background: var(--card-bg);
-    }
-
-    .feature-num {
-      font-family: var(--f-mono);
-      font-size: .68rem;
-      letter-spacing: .1em;
-      color: var(--ink-faint);
-      margin-bottom: 1rem;
-    }
-
-    .feature-title {
-      font-family: var(--f-display);
-      font-size: 1.35rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .01em;
-      margin-bottom: .6rem;
-    }
-
-    .feature-desc {
-      font-size: .88rem;
-      line-height: 1.6;
-      color: var(--ink-mid);
-    }
-
-    .feature-card .corner-mark {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      width: 28px;
-      height: 28px;
-      opacity: .35;
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 3rem clamp(1.5rem, 5vw, 4rem);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .footer-left {
-      font-family: var(--f-mono);
-      font-size: .72rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-    }
-
-    .footer-right {
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .footer-link {
-      font-family: var(--f-mono);
-      font-size: .72rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--ink-mid);
-      position: relative;
-      padding-bottom: 2px;
-    }
-
-    .footer-link::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 100%;
-      height: 1px;
-      background: var(--accent);
-      transition: right .25s;
-    }
-
-    .footer-link:hover::after {
-      right: 0;
-    }
-  </style>
 </head>
 
 <body>
@@ -638,16 +63,23 @@
       </h1>
       <div class="hero-meta">
         <div class="stack-list">
+          <span class="stack-pill hi">Python</span>
+
           <span class="stack-pill hi">Django</span>
           <span class="stack-pill hi">Django REST Framework</span>
-          <span class="stack-pill hi">HTMX</span>
-          <span class="stack-pill">PostgreSQL</span>
-          <span class="stack-pill">Python</span>
+          <span class="stack-pill hi">PostgreSQL</span>
+
+
+          <span class="stack-pill hi2">JSON</span>
+          <span class="stack-pill hi2">GitHub API</span>
+          <span class="stack-pill hi2">Git</span>
+
+          <span class="stack-pill hi2">Heroku / Render</span>
+          <span class="stack-pill hi2 ">CI/CD</span>
+          <span class="stack-pill ">HTMX</span>
+                    <span class="stack-pill ">CSS</span>
+
           <span class="stack-pill">JavaScript </span>
-          <span class="stack-pill">JSON</span>
-          <span class="stack-pill">GitHub API</span>
-          <span class="stack-pill">Heroku / Render</span>
-          <span class="stack-pill">Git</span>
           <span class="stack-pill">Figma</span>
 
         </div>
@@ -663,33 +95,30 @@
   <section class="section" id="overview">
     <div class="container">
       <p class="section-label">01 — Overview</p>
-      <h2 class="h2">A <span class="u">federated</span><br>social platform</h2>
+      <h2>A <span class="u2">federated</span> social platform</h2>
+      <p>NavajoWhite is a federated blogging and social platform built on an inbox-push model,
+            inspired by Mastodon and the modern fediverse. Each team operated an independent codebases each
+            communicating by pushing entries, likes, comments, and follow events directly to the inbox of the target author's node.</p>
 
       <div class="overview-grid">
         <div class="overview-cell">
           <div class="label">Role</div>
           <div class="value">Full-Stack Developer</div>
         </div>
-        <div class="overview-cell">
-          <div class="label">Stack</div>
-          <div class="value">Django, DRF, React, PostgreSQL, HTMX</div>
-        </div>
+
         <div class="overview-cell">
           <div class="label">Team</div>
           <div class="value">6 developers, 5 external nodes</div>
         </div>
         <div class="overview-cell">
-          <div class="label">Context</div>
+          <div class="label">Deliverables</div>
           <div class="value">University capstone; distributed systems course</div>
         </div>
       </div>
 
       <div class="two-col" style="margin-top:3rem;">
         <div>
-          <p class="body-text">NavajoWhite is a federated blogging and social platform built on an inbox-push model,
-            inspired by Mastodon and the modern fediverse. Each team operated an independent codebases each
-            communicating by
-            pushing entries, likes, comments, and follow events directly to the inbox of the target author's node.</p>
+         
           <p class="body-text"><strong>For users:</strong> data sovereignty means your content lives on the node you
             chose, not a platform you don't control. Censorship resistance follows naturally: a post removed on one node
             can still exist on others that already received it, and users can migrate nodes without losing their
@@ -926,10 +355,9 @@
             local feed as native post objects. Followers receive these on their stream just like hand-authored entries.
           </p>
           <svg class="corner-mark" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 3.5c-5.8 0-10.5 4.7-10.5 10.5 0 4.6 3 8.5 7.2 9.9.5.1.7-.2.7-.5v-1.8c-2.9.6-3.5-1.2-3.5-1.2-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1.6 1.7 2.9 1.7.3-.7.4-1.1.8-1.4-2.3-.3-4.7-1.2-4.7-5.2 0-1.1.4-2 1.1-2.7-.1-.3-.5-1.4.1-2.8 0 0 .9-.3 2.9 1.1.8-.2 1.7-.3 2.6-.3s1.8.1 2.6.3c2-1.4 2.9-1.1 2.9-1.1.6 1.4.2 2.5.1 2.8.7.7 1.1 1.6 1.1 2.7 0 4-2.4 4.9-4.7 5.2.4.3.8 1 .8 2v3c0 .3.2.6.7.5 4.2-1.4 7.2-5.3 7.2-9.9C24.5 8.2 19.8 3.5 14 3.5z"
-        stroke="#0a0a0a"
-        stroke-width="1.2"
-        stroke-linejoin="round"/>
+            <path
+              d="M14 3.5c-5.8 0-10.5 4.7-10.5 10.5 0 4.6 3 8.5 7.2 9.9.5.1.7-.2.7-.5v-1.8c-2.9.6-3.5-1.2-3.5-1.2-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1.6 1.7 2.9 1.7.3-.7.4-1.1.8-1.4-2.3-.3-4.7-1.2-4.7-5.2 0-1.1.4-2 1.1-2.7-.1-.3-.5-1.4.1-2.8 0 0 .9-.3 2.9 1.1.8-.2 1.7-.3 2.6-.3s1.8.1 2.6.3c2-1.4 2.9-1.1 2.9-1.1.6 1.4.2 2.5.1 2.8.7.7 1.1 1.6 1.1 2.7 0 4-2.4 4.9-4.7 5.2.4.3.8 1 .8 2v3c0 .3.2.6.7.5 4.2-1.4 7.2-5.3 7.2-9.9C24.5 8.2 19.8 3.5 14 3.5z"
+              stroke="#0a0a0a" stroke-width="1.2" stroke-linejoin="round" />
           </svg>
 
         </div>
@@ -974,7 +402,7 @@
         </div>
         <div>
           <p class="body-text">On the product side, designing the stream experience surfaced interesting UX questions
-            unique to federation. When content arrives from a node that is temporarily offline, how do you signal
+            unique to federation. When content arrives from a node that is temporarily offline, how do you indicate
             origin? When a like is sent but delivery fails, should it retry silently or surface an error? These
             aren't hypothetical edge cases, they happened in every demo.</p>
           <p class="body-text">The project gave me hands-on experience with the architecture that underpins real
