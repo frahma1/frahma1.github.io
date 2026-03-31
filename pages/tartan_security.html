@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tartan Smart Home — Faiza Rahman</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="project.css">
+
+</head>
+
+<body>
+
+  <!-- SVG filter defs -->
+  <svg class="svg-defs" aria-hidden="true">
+    <defs>
+      <filter id="grease" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="4" seed="2" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M10 3L5 8l5 5" />
+      </svg>
+      All Projects
+    </a>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#testing">Testing</a>
+      <a href="#experiment">Experiment</a>
+      <a href="#debt">Tech Debt</a>
+      <a href="#reflection">Reflection</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <span class="hero-eyebrow">Case Study — Software Testing & Quality Engineering</span>
+    <h1 class="hero-title">
+      Tartan<br>Smart Home
+      <svg class="mark-underline" viewBox="0 0 760 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M4,14 C80,6 180,20 280,12 C380,4 460,22 560,13 C630,7 700,17 756,12" />
+      </svg>
+    </h1>
+    <div class="hero-meta">
+      <div class="stack-list">
+        <span class="stack-pill hi">Java</span>
+        <span class="stack-pill hi">JUnit</span>
+        <span class="stack-pill hi">JaCoCo</span>
+        <span class="stack-pill hi2">SpotBugs</span>
+        <span class="stack-pill hi2">PMD</span>
+        <span class="stack-pill hi2">ErrorProne</span>
+        <span class="stack-pill">SonarQube</span>
+        <span class="stack-pill">GitHub Actions</span>
+        <span class="stack-pill">MySQL</span>
+        <span class="stack-pill">Docker</span>
+      </div>
+      <div class="hero-scroll" aria-hidden="true">
+        <div class="hero-scroll-line"></div>
+        Scroll to explore
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="section" id="overview">
+    <div class="container">
+      <p class="section-label">01 — Overview</p>
+      <h2>A <span class="u2">production-grade</span> testing pipeline</h2>
+      <p>Over five milestones in CMPUT 402 (Software Quality), our team hardened the open-source <em>Tartan Smart
+          Home</em> system, a rules-based home automation platform, through unit testing, coverage analysis, live A/B
+        experimentation, static analysis, and technical debt auditing. I was responsible for test authoring, coverage
+        instrumentation, bug discovery and fix documentation, and the A/B experiment infrastructure.</p>
+
+      <div class="overview-grid">
+        <div class="overview-cell">
+          <div class="label">Role</div>
+          <div class="value">Test Engineer; unit tests, coverage analysis, bug fixes, CI integration</div>
+        </div>
+        <div class="overview-cell">
+          <div class="label">Team</div>
+          <div class="value">4 developers</div>
+        </div>
+
+        <div class="overview-cell">
+          <div class="label">Deliverables
+          </div>
+          <div class="value">Testing Tartan Smart Home; Java/Dropwizard rules engine for IoT home automation</div>
+        </div>
+      </div>
+
+
+
+      <!-- Key results -->
+      <div class="result-cards" style="margin-top:3rem;">
+        <div class="result-card">
+          <div class="stat">79%</div>
+          <div class="stat-label">Line Coverage achieved</div>
+          <p>Starting from untested code, our black-box and white-box test suite reached 79% line coverage and 66%
+            branch coverage on the core rules evaluator.</p>
+        </div>
+        <div class="result-card blue">
+          <div class="stat">1</div>
+          <div class="stat-label">Logic bug discovered & fixed</div>
+          <p>White-box analysis via JaCoCo uncovered a dead <code>else if</code> branch in the lighting rule, a
+            latent bug that would have silently misfired in production.</p>
+        </div>
+        <div class="result-card">
+          <div class="stat">3→5</div>
+          <div class="stat-label">Days of tech debt discovered</div>
+          <p>SonarQube tracked how our feature additions grew technical debt from 3d 6h (baseline) to 5d 1h;
+            quantifying the cost of moving fast.</p>
+        </div>
+        <div class="result-card blue">
+          <div class="stat">A/B</div>
+          <div class="stat-label">Live experiment shipped</div>
+          <p>Built and ran a real A/B experiment in production Docker containers showing that cost-framed reports
+            reduced light usage more than time-framed ones.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTING -->
+  <section class="section" id="testing">
+    <div class="container">
+      <p class="section-label">02 — Testing</p>
+      <h2>From zero coverage to <span class="u">79%</span></h2>
+      <p>The system enforces five home-automation rules. My job was to break them; and then prove they were fixed. Each
+        rule got a black-box test suite first (what <em>should</em> happen), then white-box analysis via JaCoCo to find
+        the branches our tests couldn't reach.</p>
+
+      <!-- Coverage metrics -->
+      <div class="coverage-table fade-in" style="margin-top: 2.5rem;">
+        <table>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Result</th>
+              <th class="bar-cell">Coverage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Instruction Coverage</td>
+              <td class="num">77%</td>
+              <td class="bar-cell">
+                <div class="bar-wrap">
+                  <div class="bar-fill" style="width:77%"></div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Branch Coverage</td>
+              <td class="num">66%</td>
+              <td class="bar-cell">
+                <div class="bar-wrap">
+                  <div class="bar-fill" style="width:66%"></div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Line Coverage</td>
+              <td class="num">79%</td>
+              <td class="bar-cell">
+                <div class="bar-wrap">
+                  <div class="bar-fill blue" style="width:79%"></div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Rule findings -->
+      <div style="margin-top: 3rem;">
+        <h3>Rules tested &amp; bugs found</h3>
+        <p>Each rule was tested with a named suite (R1A, R1B…). JaCoCo reports drove targeted additions, tests weren't
+          added to inflate numbers, but to hit real uncovered branches.</p>
+      </div>
+
+      <div class="findings-grid fade-in" style="margin-top: 1.5rem;">
+        <div class="finding-card">
+          <span class="rule">R1: Vacancy &amp; Lights</span>
+          <h3>Bug found: lights couldn't be turned off at home</h3>
+          <p>The system auto-forced lights on when occupied, preventing residents from switching them off at night.
+            Fix: lights only auto-on when occupant first enters (door-open event), not any time the house is occupied.
+          </p>
+        </div>
+        <div class="finding-card">
+          <span class="rule">R2: Alarm &amp; Door</span>
+          <h3>Edge case: alarm with occupant still present</h3>
+          <p>JaCoCo flagged an uncovered branch where an alarm triggered while occupant was still preparing to leave.
+            Added
+            R2E to cover the "door open, alarm enabled, house still occupied" state.</p>
+        </div>
+        <div class="finding-card">
+          <span class="rule blue">R3: Vacancy &amp; Door</span>
+          <h3>Dead code found in door-close logic</h3>
+          <p>Two branches flagged: the system attempted to close an already-closed door, and the away-timer deactivation
+            path was unreachable. Added R3D and R3E to expose both states.</p>
+        </div>
+        <div class="finding-card">
+          <span class="rule blue">R1: White Box</span>
+          <h3>Dead <code>else if</code> </h3>
+          <p>JaCoCo showed <code>else if (lightState)</code> never fired, it was logically equivalent to the preceding
+            <code>if</code>, making the second block unreachable. Replaced with a plain <code>else</code>. Without
+            coverage tooling this would have shipped.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Timeline -->
+      <div style="margin-top: 4rem;">
+        <h3>Testing approach by milestone</h3>
+      </div>
+      <div class="timeline ">
+        <div class="phase">
+
+          <div class="project-card">
+            <span class="phase-label">G1</span>
+            <h3>Unit Tests</h3>
+            <ul>
+              <li>Wrote named JUnit tests for each system rule using only the public interface. </li>
+              <li>Set up GitHub Actions CI so every branch ran the test suite automatically.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="phase-label">
+            <span>G2</span>
+            <strong>Coverage</strong>
+          </div>
+          <div class="phase-body">
+            <ul>
+              <li>JaCoCo white-box analysis &amp; bug fixes </li>
+              <li>Instrumented the build with JaCoCo to generate branch-level coverage reports.</li>
+              <li>Discovered and fixed the dead code</li>
+            </ul>
+
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="phase-label">
+            <span>G3</span>
+            <strong>In Production</strong>
+          </div>
+          <div class="phase-body">
+            <ul>
+              <li>Implemented usage tracking (light minutes, HVAC uptime) and a group-based reporting system. </li>
+              <li>A/B experiment shipped in live Docker containers</li>
+            </ul>
+
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="phase-label">
+            <span>G4</span>
+            <strong>Static Analysis</strong>
+          </div>
+          <div class="phase-body">
+            <ul>
+              <li>SpotBugs + PMD + ErrorProne — 280+ issues surfaced</li>
+              <li>Ran three static analysers and cross-referenced their output to identify overlaps, unique catches, and
+                false positives. </li>
+              <li>Identified the 10 highest-priority issues by category and actionability.</li>
+            </ul>
+
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="phase-label">
+            <span>G5</span>
+            <strong>Tech Debt</strong>
+          </div>
+          <div class="phase-body">
+            <ul>
+              <li>Ran SonarQube on both the baseline and our modified branch. </li>
+              <li>Quantified codebase's technical debt growth</li>
+              <li>Proposed a concrete CI pipeline upgrade </li>
+            </ul>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIMENT -->
+  <section class="section" id="experiment">
+    <div class="container">
+      <p class="section-label">03 — In-Production Experiment</p>
+      <h2>Does framing <span class="u">change behaviour?</span></h2>
+      <p>We instrumented the running system to track real usage, then split houses into groups receiving different
+        feedback. A genuine A/B test, not a simulation. The question: does seeing your energy bill change how you use
+        the smart home?</p>
+
+      <div class="experiment-grid ">
+        <div class="experiment-group">
+          <span class="group-badge control">Control Group</span>
+          <h3>Neutral baseline report</h3>
+          <p>Houses in Group 1 received general energy usage summaries, total minutes the lights and HVAC ran, without
+            cost framing or behavioural prompts.</p>
+        </div>
+        <div class="experiment-group">
+          <span class="group-badge experiment">Experimental Group</span>
+          <h3>Cost-projected feedback</h3>
+          <p>Houses in Group 2 received the same data translated into estimated electricity costs. Same underlying
+            numbers, different framing but designed to create personal stakes by quantifying usage in dollars.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 3rem;">
+        <h3>Infrastructure</h3>
+        <p>The experiment was controlled via a <code>groupExperiment</code> flag set randomly per house in
+          <code>config.docker.yml</code>. Every interaction was group-tagged. Switching a house's
+          treatment required one config line change and no code deploy to simplify rollbacks.
+        </p>
+        <p style="margin-top:1rem;">Results were queried directly from MySQL using a time-buckets and then
+          cleaned in Excel for charting. The data showed cost framing reduced average light usage, though HVAC usage
+          was less responsive to either report type, likely because HVAC behaviour is more habitual and less
+          in-the-moment.</p>
+      </div>
+
+      <div class="result-cards fade-in" style="margin-top: 2.5rem;">
+        <div class="result-card">
+          <div class="stat">↓</div>
+          <div class="stat-label">Light usage - cost group</div>
+          <p>Cost-framed feedback correlated with measurably lower light-on minutes compared to the neutral baseline
+            group.</p>
+        </div>
+        <div class="result-card blue">
+          <div class="stat">≈</div>
+          <div class="stat-label">HVAC usage - both groups</div>
+          <p>HVAC behaviour was similar across groups, suggesting habitual use is less responsive to feedback framing
+            than discretionary actions like lighting.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATIC ANALYSIS -->
+  <section class="section" id="debt">
+    <div class="container">
+      <p class="section-label">04 — Static Analysis &amp; Tech Debt</p>
+      <h2>Three tools, <span class="u2">280+</span> issues</h2>
+      <p>Running SpotBugs, PMD, and ErrorProne against the same codebase revealed how different tools catch different
+        things and how their outputs often overlap, conflict, or mislead without a centralised view.</p>
+
+      <div class="tool-grid fade-in">
+        <div class="tool-card">
+          <div class="tool-name">SpotBugs</div>
+          <div class="tool-count">42</div>
+          <div class="tool-unit">warnings, 0 errors</div>
+          <div class="tag-list">
+            <span class="tag">Bad Practice (15)</span>
+            <span class="tag">Malicious Code (14)</span>
+            <span class="tag">Dodgy Code (4)</span>
+            <span class="tag">Performance (3)</span>
+            <span class="tag">Correctness (2)</span>
+          </div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-name">PMD</div>
+          <div class="tool-count">170</div>
+          <div class="tool-unit">errors, 0 warnings</div>
+          <div class="tag-list">
+            <span class="tag">ControlStatementBraces (20)</span>
+            <span class="tag">NamingConventions</span>
+            <span class="tag">EmptyCatchBlock</span>
+            <span class="tag">LooseCoupling</span>
+            <span class="tag">UnusedLocalVariable</span>
+          </div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-name">ErrorProne</div>
+          <div class="tool-count">69</div>
+          <div class="tool-unit">1 error, 68 warnings</div>
+          <div class="tag-list">
+            <span class="tag">JdkObsolete</span>
+            <span class="tag">SynchronizeOnNonFinalField</span>
+            <span class="tag">UnusedVariable</span>
+            <span class="tag">EmptyCatch</span>
+            <span class="tag">EqualsHashCode</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 3rem;" class="fade-in">
+        <h3>Technical Debt - Baseline vs. Our Branch</h3>
+        <p>SonarQube gave us what the individual tools couldn't: a single number for the cost of our decisions. Adding
+          features to the system grew technical debt by nearly two full working days.</p>
+      </div>
+
+      <div class="debt-row fade-in">
+        <div class="debt-card">
+          <div class="debt-label">Baseline (original Tartan code)</div>
+          <div class="debt-val">3d 6h</div>
+          <div class="debt-delta">185 maintainability issues · SonarQube quality gate: ✓ pass</div>
+        </div>
+        <div class="debt-card">
+          <div class="debt-label">Main branch (with our features)</div>
+          <div class="debt-val">5d 1h</div>
+          <div class="debt-delta"><span class="arrow">↑</span> 313 issues (+128) · 1 blocker added · Gate: ✓ still
+            passes</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 2.5rem;" class="fade-in">
+        <h3>Proposed pipeline improvements</h3>
+        <p>The main takeaway: three separate tools with separate outputs is harder to act on than one consolidated view.
+          Our recommendation was to integrate SonarQube directly into GitHub Actions,
+          retire PMD (too much overlap, harder to parse), keep SpotBugs and ErrorProne for build-time feedback, and set
+          strict security gate thresholds so debt accumulation is caught before merge, not after.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFLECTION -->
+  <section class="section" id="reflection">
+    <div class="container">
+      <p class="section-label">05 — Reflection</p>
+      <h2>What I <span class="u">actually learned</span></h2>
+      <p>This wasn't a toy testing exercise, it was working on a real codebase with real bugs, real coverage gaps, and
+        a real A/B experiment running in production containers. The gap between "tests pass" and "software is correct"
+        became very concrete.</p>
+
+      <div class="reflection-grid fade-in">
+        <div class="reflection-card">
+          <h3>Coverage numbers lie without interpretation</h3>
+          <p>77% instruction coverage sounds good. But a 66% branch rate meant there were whole decision paths we
+            couldn't verify. JaCoCo didn't just tell me <em>what</em> was covered; it told me <em>where to look
+              next</em>.</p>
+        </div>
+        <div class="reflection-card blue">
+          <h3>Static analysis tools disagree on purpose</h3>
+          <p>PMD found 170 issues. SpotBugs found 42. They overlap on some things and diverge wildly on others. Running
+            all three and cross-referencing taught me that no single tool has the full picture, and false positives are
+            part of the work.</p>
+        </div>
+        <div class="reflection-card">
+          <h3>Experiment infrastructure matters as much as the experiment</h3>
+          <p>The A/B feature was only as useful as the config flag that controlled it. Designing the
+            <code>groupExperiment</code> propagation so it touched the DB schema, the service layer, and the UI in one
+            pass meant we could change treatments without redeploying.
+          </p>
+        </div>
+        <div class="reflection-card blue">
+          <h3>Technical debt is a real unit of time</h3>
+          <p>Seeing "1 day 19 hours of new debt" attached to our pull requests made abstract quality concerns concrete.
+            SonarQube's debt estimation isn't perfect, but it's a far better conversation starter than "this code is
+            messy."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer>
+    <div class="footer-left">Faiza Rahman — Portfolio</div>
+    <div class="footer-right">
+      <a href="index.html" class="footer-link">Home</a>
+      <a href="https://github.com/frahma1" target="_blank" class="footer-link">GitHub</a>
+      <a href="https://www.linkedin.com/in/faiza-rahman/" target="_blank" class="footer-link">LinkedIn</a>
+    </div>
+  </footer>
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Fade in on scroll
+    const faders = document.querySelectorAll('.fade-in');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    faders.forEach(el => obs.observe(el));
+  </script>
+</body>
+
+</html>

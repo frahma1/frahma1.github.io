@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<!---TODO
+-seperate css
+-diagrams
+-mockups
+-add more detail
+  -prototypesing
+  - user flows
+  - documantation
+  - hosting on heroku
+  - final product-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Public Sector Tools — Faiza Rahman</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap">
+  <link rel="stylesheet" href="project.css">
+</head>
+
+<body>
+
+  <svg class="svg-defs" aria-hidden="true">
+    <defs>
+      <filter id="grease" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="4" seed="2" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+
+  <nav id="main-nav">
+    <a href="home.html" class="nav-back">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M10 3L5 8l5 5" />
+      </svg>
+      All Projects
+    </a>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#process">Process</a>
+      <a href="#features">Features</a>
+      <a href="#reflection">Reflection</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div>
+      <p class="hero-eyebrow">Internship at the GoA Ministry of Environment and Protected Areas - Software and Data
+        Engineering</p>
+      <h1 class="hero-title">
+        Public-Sector<br>Tools
+        <svg class="mark-underline" viewBox="0 0 760 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4,14 C80,6 180,20 280,12 C380,4 460,22 560,13 C630,7 700,17 756,12" />
+        </svg>
+      </h1>
+      <div class="hero-meta">
+        <div class="stack-list">
+          <span class="stack-pill hi">Python</span>
+
+          <span class="stack-pill hi">Django</span>
+          <span class="stack-pill hi">ETL pipelines</span>
+          <span class="stack-pill">Micorsoft SQL Server</span>
+          <span class="stack-pill">Python</span>
+          <span class="stack-pill">JSON</span>
+          <span class="stack-pill">NoSQL </span>
+          <span class="stack-pill">Git</span>
+
+        </div>
+        <div class="hero-scroll">
+          <div class="hero-scroll-line"></div>
+          Scroll to explore
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="section" id="overview">
+    <div class="container">
+      <p class="section-label">01 — Overview</p>
+      <h2 class="h2">Built data systems with <span class="u">ETL and geospatial tools</span></h2>
+
+      <div class="overview-grid">
+        <div class="overview-cell">
+          <div class="label">Role</div>
+          <div class="value">Software and Data Engineering</div>
+        </div>
+        <div class="overview-cell">
+          <div class="label">Stack</div>
+          <div class="value">Python, Django, SQL, NoSQL,Yaml,Excel, JavaScript, HTMX</div>
+        </div>
+        <div class="overview-cell">
+          <div class="label">Team</div>
+          <div class="value">2 developers serving 4 teams</div>
+        </div>
+        <div class="overview-cell">
+          <div class="label">Context</div>
+          <div class="value">Government of Alberta — Environmental data systems internship</div>
+        </div>
+      </div>
+
+
+      <div style="margin-top:3rem;">
+        <div>
+          <p class="body-text">In support of Alberta's TIER regulation I designed and maintained a Django-based data
+            platform supporting multiple applications
+            across departments, enabling scalable data storage and streamlined workflows.
+
+          </p>
+
+        </div>
+
+        <p>As a result a fragmented, manual data ecosystem was transformed into a unified, automated platform. Data from
+          300+
+          sources was centralized into a single source of truth, workflows became significantly faster, and system
+          reliability improved through robust validation and testing. The platform enabled scalable collaboration
+          across departments while reducing operational overhead and manual intervention</p>
+
+
+      </div>
+      <div class="result-cards" style="margin-top:3rem;">
+        <div class="result-card">
+          <div class="stat-label">Efficiency gains:</div>
+          <p class="body-text">reduced manual workflows by ~7.5x and accelerated data access by ~2x through automation,
+            improved UI flows, and advanced Excel ingestion.</p>
+
+        </div>
+        <div class="result-card blue">
+          <div class="stat-label">Data automation:</div>
+          <p class="body-text"><strong></strong>built ETL pipelines to transform Excel data into structured JSON and
+            TOML formats, standardizing over 300 profiles spanning 2018–2024 while ensuring future regulatory
+            compatibility.</p>
+        </div>
+
+        <div class="result-card ">
+          <div class="stat-label">Geospatial tooling:</div>
+          <p class="body-text"> developed a Leaflet-based mapping system to automate location visualization across ~600
+            sites, eliminating manual Google Earth workflows.</p>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-item">
+          <div class="stat-number circled">330+
+            <svg class="scribble-circle" viewBox="20 -10 120 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path
+                d="M 84 0 C 98 0 152 -7 159 28 C 162 76 142 73 82 69 C 43 70 36 70 29 70 C 25 72 2 58 2 35 C 2 12 22 -2 44 0 Z" />
+            </svg>
+          </div>
+          <div class="stat-label">sources<br>consolidated</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">2</div>
+          <div class="stat-label">regulatory agencies <br>scraped</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">600+</div>
+          <div class="stat-label"><br>GIS mapped facilities</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">~7.5x</div>
+          <div class="stat-label">faster <br>user workflows</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section" id="process">
+    <p class="section-label">02 — Process</p>
+    <div class="container">
+      <div class="project-grid">
+        <div class="project-card">
+          <h2 class="h2"> <span class="u">ETL Pipeline</span></h2>
+          <p class="body-text"> </p>
+        </div>
+
+
+        <!--The Problem -->
+        <div class="project-card plain">
+          <div class="process-heading">The Problem</div>
+
+          <p class="body-text">
+            Environmental reporting data arrived as Excel files. Hundreds of sources,
+            six-plus years of submissions, each with slight variations in schema,
+            column names, and metadata. The real issue wasn't volume. It was the
+            absence of structure. Manual cleaning didn't scale, and any one-off fix
+            would break with the next regulatory change or form revision.
+          </p>
+          <p class="body-text">
+            Older metrics lived in separate sheets, exposed to being overwritten or
+            lost. Forms were clearly versioned, but the fragmented file-per-submission
+            nature made cross-facility comparison and aggregation unreliable. All the
+            data existed, it just wasn't in a shape that downstream systems could
+            trust.
+          </p>
+
+          <div class="callout">
+            <div class="callout-label">Why it mattered</div>
+            <p>TIER compliance requires accurate, comparable emissions data across
+              facilities. Inconsistent source formats were directly obstructing the
+              government's ability to track trends, enforce compliance, and adapt
+              reporting requirements over time.</p>
+          </div>
+        </div>
+
+        <!-- ── THE SYSTEM ── -->
+        <div class="project-card plain">
+          <div class="process-heading">The System</div>
+
+          <p class="body-text">
+            I designed a flexible ETL pipeline in Python, using OpenPyXL, PyWin32,
+            YAML, and VBA, built around one principle: schema-tolerance. Rather than
+            hardcoding transformations for each form version, the pipeline adapts to
+            minor structural variations without breaking.
+          </p>
+
+          <div class=" feature-grid--row feature-grid" style="margin-top: 1.5rem;">
+            <div class="feature-card">
+              <div class="feature-num">01</div>
+              <div class="feature-title">Parse</div>
+              <p class="feature-desc">Ingested heterogeneous Excel formats and normalised
+                them into a consistent schema regardless of source version.</p>
+            </div>
+
+
+
+            <div class="feature-card">
+              <div class="feature-num">02</div>
+              <div class="feature-title">Extract</div>
+              <p class="feature-desc">Dynamically identified and standardised metadata
+                fields — facility IDs, reporting periods, units — across all form
+                variants.</p>
+            </div>
+
+
+            <div class="feature-card">
+              <div class="feature-num">03</div>
+              <div class="feature-title">Calculate</div>
+              <p class="feature-desc">Manipulated embedded VBA scripts to ensure
+                emissions calculations ran correctly before extraction, preserving
+                formula logic without manual intervention.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-num">04</div>
+              <div class="feature-title">Output</div>
+              <p class="feature-desc">Converted results into structured JSON/TOML,
+                ready for SQL ingestion and downstream analysis pipelines.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── IMPACT ── -->
+        <div class="project-card plain">
+          <div class="process-heading">Impact</div>
+
+          <div class="stat-row">
+            <div>
+              <div class="stat-number">300<span style="font-size:.5em">+</span></div>
+              <div class="stat-label">Facility profiles standardised</div>
+            </div>
+            <div>
+              <div class="stat-number">6<span style="font-size:.5em">yrs</span></div>
+              <div class="stat-label">Of historical data unified</div>
+            </div>
+            <div>
+              <div class="stat-number">1</div>
+              <div class="stat-label">Source of truth for downstream systems</div>
+            </div>
+          </div>
+
+          <div class="callout blue" style="margin-top: 2rem;">
+            <div class="callout-label">Outcome</div>
+            <p>Manual preprocessing effort dropped significantly. Ingestion workflows
+              are now future-proofed against new form versions, and data is consistently
+              available for analysis, automation, and regulatory calculation — without
+              a human in the loop for each new submission cycle.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="container">
+      <div class="project-grid">
+        <div class="project-card">
+
+          <h2 class="h2"><span class="u">GIS Validation Tool</span></h2>
+        </div>
+
+        <!-- The Problem -->
+        <div class="project-card plain">
+          <div class="process-heading">The Problem</div>
+          <p class="body-text">Engineering teams were manually comparing KML files
+            side-by-side to check coordinate consistency across ~600 facilities and
+            ~5,700 files. The bottleneck wasn't access to the data — it was that the
+            process couldn't run reliably or repeatably without a human in the loop.
+            Any inconsistency required visual inspection rather than automated detection.
+          </p>
+        </div>
+
+        <!-- The System -->
+        <div class="project-card plain">
+          <div class="process-heading">The System</div>
+          <p class="body-text">I built a KML-based geospatial visualisation tool using
+            Leaflet that replaced manual comparison with automated spatial auditing.</p>
+
+          <div class="feature-grid feature-grid--row" style="margin-top: 1.5rem;">
+            <div class="feature-card">
+              <div class="feature-num">01</div>
+              <div class="feature-title">Plot</div>
+              <p class="feature-desc">Dynamically rendered ~600 facilities on an
+                interactive map from live database records.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-num">02</div>
+              <div class="feature-title">Audit</div>
+              <p class="feature-desc">Detected overlapping and inconsistent KML
+                submissions across ~5,700 files without manual lookup.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-num">03</div>
+              <div class="feature-title">Flag</div>
+              <p class="feature-desc">Highlighted spatial conflicts and anomalies
+                directly on the map — no cross-referencing spreadsheets.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-num">04</div>
+              <div class="feature-title">Validate</div>
+              <p class="feature-desc">Ran automated checks for malformed or
+                structurally inconsistent geospatial data at scale.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Impact -->
+        <div class="project-card plain">
+          <div class="process-heading">Impact</div>
+          <div class="stat-row">
+            <div>
+              <div class="stat-number">600<span style="font-size:.5em">+</span></div>
+              <div class="stat-label">Facilities mapped</div>
+            </div>
+            <div>
+              <div class="stat-number">5.7<span style="font-size:.5em">k</span></div>
+              <div class="stat-label">Files validated</div>
+            </div>
+            <div>
+              <div class="stat-number">0</div>
+              <div class="stat-label">Manual comparisons needed</div>
+            </div>
+          </div>
+          <div class="callout" style="margin-top: 2rem;">
+            <div class="callout-label">Outcome</div>
+            <p>Spatial conflict identification dropped from hours to minutes.
+              Geospatial data integrity improved across all datasets, with a
+              repeatable process that runs without human intervention.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="container">
+      <div class="project-grid">
+        <div class="project-card">
+
+          <h2 class="h2"><span class="u">Automated Data Ingestion</span></h2>
+        </div>
+
+
+        <!-- The Problem -->
+        <div class="project-card plain">
+          <div class="process-heading">The Problem</div>
+          <p class="body-text">Critical regulatory data from external agencies required
+            frequent manual updates, introducing lag, inconsistencies, and risk of
+            outdated information reaching downstream systems. The process needed to
+            run continuously and reliably without human intervention.</p>
+        </div>
+
+        <!-- The System -->
+        <div class="project-card plain">
+          <div class="process-heading">The System</div>
+          <p class="body-text">I developed automated web scraping pipelines using
+            BeautifulSoup, built around two non-negotiables: idempotency and
+            resilience.</p>
+
+          <div class="feature-grid feature-grid--row" style="margin-top: 1.5rem;">
+            <div class="feature-card">
+              <div class="feature-num">01</div>
+              <div class="feature-title">Extract</div>
+              <p class="feature-desc">Pulled structured data from multiple external
+                agency sources on a continuous, automated schedule.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-num">02</div>
+              <div class="feature-title">Normalise</div>
+              <p class="feature-desc">Standardised and integrated updates into internal
+                databases regardless of source format differences.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-num">03</div>
+              <div class="feature-title">Idempotent</div>
+              <p class="feature-desc">Designed so repeated runs produced identical
+                results — no duplicate records, no data corruption.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-num">04</div>
+              <div class="feature-title">Resilient</div>
+              <p class="feature-desc">Handled missing fields and structural HTML
+                changes gracefully, maintaining historical records for compatibility.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Impact -->
+        <div class="project-card plain">
+          <div class="process-heading">Impact</div>
+          <div class="callout blue" style="margin-top: 0;">
+            <div class="callout-label">Outcome</div>
+            <p>Eliminated manual update workflows entirely. Data stays consistent and
+              current across systems automatically — reducing operational overhead,
+              human error, and the lag between external updates and internal
+              visibility.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="project-grid">
+        <div class="project-card">
+          <h2 class="h2"><span class="u">Metric Automation System</span></h2>
+        </div>
+
+        <!-- The Problem -->
+        <div class="project-card plain">
+          <div class="process-heading">The Problem</div>
+          <p class="body-text">KPI calculations were manually performed across hundreds
+            of submissions, producing inconsistent results and low confidence in
+            reported metrics. There was no reliable way to verify outputs or compare
+            performance consistently across facilities — a direct risk to compliance
+            reporting credibility.</p>
+        </div>
+
+        <!-- The System -->
+        <div class="project-card plain">
+          <div class="process-heading">The System</div>
+          <p class="body-text">I built an automated KPI calculation and validation
+            pipeline to standardise and verify metrics across all submissions.</p>
+
+          <div class="feature-grid feature-grid--row" style="margin-top: 1.5rem;">
+            <div class="feature-card">
+              <div class="feature-num">01</div>
+              <div class="feature-title">Calculate</div>
+              <p class="feature-desc">Processed 300+ submissions using consistent
+                metric definitions — no per-file manual work.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-num">02</div>
+              <div class="feature-title">Validate</div>
+              <p class="feature-desc">Ran automated checks against expected outputs to
+                catch discrepancies before results were used downstream.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-num">03</div>
+              <div class="feature-title">Integrate</div>
+              <p class="feature-desc">Pushed verified results directly into a
+                centralised database — single source of truth for all metrics.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-num">04</div>
+              <div class="feature-title">Audit</div>
+              <p class="feature-desc">Maintained full transparency in calculation logic
+                to support regulatory auditability and reproducibility.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Impact -->
+        <div class="project-card plain">
+          <div class="process-heading">Impact</div>
+          <div class="stat-row">
+            <div>
+              <div class="stat-number">300<span style="font-size:.5em">+</span></div>
+              <div class="stat-label">Submissions standardised</div>
+            </div>
+            <div>
+              <div class="stat-number">↑</div>
+              <div class="stat-label">Trust in reported metrics</div>
+            </div>
+          </div>
+          <div class="callout" style="margin-top: 2rem;">
+            <div class="callout-label">Outcome</div>
+            <p>Eliminated manual KPI workflows entirely. Metrics are now
+              audit-ready by default — consistent definitions, automated validation,
+              and a centralised record make compliance reporting defensible and
+              scalable.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- REFLECTION -->
+  <section class="section" id="reflection">
+    <div class="container">
+      <p class="section-label">04 — Challenges &amp; Reflection</p>
+      <h2 class="h2">What I <span class="u">learned</span></h2>
+
+      <div class="two-col" style="margin-top:2.5rem;">
+        <div>
+          <p class="body-text">One of the most challenging aspects of this work was aligning technical systems with
+            evolving regulatory requirements. Unlike traditional software projects, the data structures and workflows
+            were directly influenced by policy decisions, which required translating ambiguous regulatory language into
+            precise, enforceable logic within the system.</p>
+
+          <p class="body-text">Working closely with policy makers and domain experts, I had to develop a working
+            understanding of emissions reporting standards, facility classifications, and the underlying environmental
+            context. This meant going beyond implementation, researching policy documents, clarifying intent behind
+            requirements, and ensuring that the system reflected not just what was specified, but what was actually
+            needed for accurate compliance tracking.</p>
+
+          <p class="body-text">On the engineering side, collaborating across teams required balancing flexibility with
+            consistency. Different systems and stakeholders had varying assumptions about data formats and workflows, so
+            I focused on building resilient pipelines and validation layers that could adapt to change without breaking.
+          </p>
+
+          <div class="callout">
+            <div class="callout-label">Key Takeaway</div>
+            <p>Building effective systems in a regulatory environment requires more than technical execution. It demands
+              the ability to translate policy into code, design for ambiguity, and create systems that remain robust as
+              both requirements and data evolve.</p>
+          </div>
+        </div>
+
+        <div>
+          <p class="body-text">A major learning was the importance of domain context. Understanding the chemistry behind
+            emissions data and how it translated into policy thresholds allowed me to design more meaningful validation
+            checks and metrics. Instead of treating data as abstract inputs, I began to see how inaccuracies could
+            directly impact compliance decisions and environmental outcomes.</p>
+
+          <p class="body-text">This context also shaped product decisions. For example, prioritizing transparency and
+            auditability in calculations wasn’t just a technical choice, it was necessary for stakeholder trust and
+            regulatory review. Similarly, designing tools that aligned with existing workflows (like Excel-based
+            processes) ensured adoption across non-technical users.</p>
+
+          <p class="body-text">Overall, this experience strengthened my ability to operate at the intersection of
+            engineering, policy, and domain knowledge, delivering systems that are not only technically sound, but also
+            usable, trustworthy, and aligned with real-world constraints.</p>
+
+          <div class="callout">
+            <div class="callout-label">Skills Built</div>
+            <p>Cross-functional collaboration (engineering + policy), translating regulatory requirements into system
+              design, domain-driven data modeling, stakeholder communication, and building audit-ready, production-grade
+              data systems.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-left">Faiza Rahman — Portfolio</div>
+    <div class="footer-right">
+      <a href="index.html" class="footer-link">Home</a>
+      <a href="https://github.com/frahma1" target="_blank" class="footer-link">GitHub</a>
+      <a href="https://www.linkedin.com/in/faiza-rahman/" target="_blank" class="footer-link">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+  </script>
+  <script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
+
+</body>
+
+</html>

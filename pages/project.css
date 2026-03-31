@@ -325,7 +325,7 @@ nav.scrolled {
 .overview-cell {
   background: var(--bg);
   padding: 1.75rem 1.5rem;
-   flex: 1;
+  flex: 1;
 }
 
 .overview-cell .label {
@@ -528,7 +528,9 @@ nav.scrolled {
 .project-card:hover {
   background: var(--card-bg);
 }
-
+.project-card .plain:hover {
+  background: var(--bg);
+}
 .project-num {
   font-family: var(--f-mono);
   font-size: 0.68rem;
@@ -586,6 +588,7 @@ nav.scrolled {
 }
 
 /* ─── FEATURES ────────────────────────────────────────── */
+
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -595,11 +598,20 @@ nav.scrolled {
   margin-top: 2.5rem;
 }
 
+.feature-grid--row {
+  display: flex;
+}
+@media (max-width: 768px) {
+  .feature-grid--row {
+    grid-template-columns: 1fr;
+  }
+}
 .feature-card {
   background: var(--bg);
   padding: 2rem 1.75rem;
   transition: background 0.2s;
   position: relative;
+  flex: 1;
 }
 
 .feature-card:hover {
@@ -1064,8 +1076,6 @@ p {
 p + p {
   margin-top: 1rem;
 }
-
-
 
 /* ── RESULT CARDS ── */
 .result-cards {
