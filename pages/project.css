@@ -486,6 +486,18 @@ nav.scrolled {
 }
 
 /* ─── PROCESS ─────────────────────────────────────────── */
+.image-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0;
+}
+
+.image-wrapper img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
 .process-block {
   margin-top: 4rem;
 }

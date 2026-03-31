@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <!---TODO
--seperate css
--diagrams
+
 -mockups
 -add more detail
   -prototypesing
@@ -35,7 +34,7 @@
   </svg>
 
   <nav id="main-nav">
-    <a href="home.html" class="nav-back">
+    <a href="../home.html" class="nav-back">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
         stroke-linejoin="round">
         <path d="M10 3L5 8l5 5" />
@@ -144,7 +143,6 @@
 
 
 
-
       <div class="stat-row">
         <div class="stat-item">
           <div class="stat-number circled">5
@@ -175,24 +173,34 @@
     <div class="container">
       <p class="section-label">02 — Process</p>
       <h2 class="h2">How it was <span class="u">built</span></h2>
-      <p>Building a social network where no single person is in charge sounds simple, but it creates an immediate
-        problem: how do you get completely <b>separate systems, built by different teams</b>, to talk to each other
-        reliably?
-        We solved this with a shared rulebook. Every action on the platform gets packaged into a small, labelled message
-        and delivered directly to the right person's
-        inbox on whichever server they live on. It works a bit like email: you don't need to be on the same provider as
-        someone to send them a message, you just need to know their address.
-      </p>
-      <p>
-        <br>
-        The hardest part wasn't writing the code, it was working with five other teams who were building their own
-        versions of the same system. When we sat down to connect our servers together, we found we'd all made slightly
-        different assumptions about how things should be formatted. We had to negotiate a common standard mid-project
-        and update our database structure without breaking everything that already worked.
-        On the front end, the challenge was taking all those messages arriving from different servers, each formatted
-        slightly differently, and turning them into a single, clean feed that just looks like a normal social media
-        timeline.
-      </p>
+      <div class="two-col">
+      <div >
+        <p>Building a social network where no single person is in charge sounds simple, but it creates an immediate
+          problem: how do you get completely <b>separate systems, built by different teams</b>, to talk to each other
+          reliably?
+          We solved this with a shared rulebook. Every action on the platform gets packaged into a small, labelled
+          message
+          and delivered directly to the right person's
+          inbox on whichever server they live on. It works a bit like email: you don't need to be on the same provider
+          as
+          someone to send them a message, you just need to know their address.
+        </p>
+        <p>
+          <br>
+          The hardest part wasn't writing the code, it was working with five other teams who were building their own
+          versions of the same system. When we sat down to connect our servers together, we found we'd all made slightly
+          different assumptions about how things should be formatted. We had to negotiate a common standard mid-project
+          and update our database structure without breaking everything that already worked.
+          On the front end, the challenge was taking all those messages arriving from different servers, each formatted
+          slightly differently, and turning them into a single, clean feed that just looks like a normal social media
+          timeline.
+        </p>
+      </div>
+      <div>
+        <div class="image-wrapper">
+          <img src="/images/nw_layers.svg" alt="System architecture diagram">
+        </div>
+      </div></div>
 
       <!-- Database Design -->
       <div class="process-block">

@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindSea — Faiza Rahman</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="project.css">
+  <style>
+    /* ── page-level overrides ── */
+
+    /* Hero background: soft radial glow in accent2 (blue — suits mental health / calm) */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      top: -10%;
+      left: -8%;
+      width: min(60vw, 680px);
+      height: min(60vw, 680px);
+      background: var(--accent2);
+      border-radius: 50%;
+      opacity: .06;
+      filter: blur(90px);
+    }
+
+    /* Hero underline: blue on this page */
+    .hero-title .mark-underline path {
+      stroke: var(--accent2);
+    }
+
+    /* Persona cards */
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .persona-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.6rem;
+    }
+
+    .persona-card .persona-name {
+      font-family: var(--f-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -.01em;
+      color: var(--ink);
+      margin-bottom: .2rem;
+    }
+
+    .persona-card .persona-age {
+      font-family: var(--f-mono);
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 1rem;
+      padding-bottom: .8rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .persona-card p {
+      font-size: .88rem;
+      line-height: 1.7;
+      color: var(--ink-mid);
+      max-width: none;
+    }
+
+    /* Wireframe grid — caption below each item */
+    .wireframe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    .wireframe-item {
+      background: var(--bg);
+      padding: 1.4rem 1.2rem;
+    }
+
+    .wireframe-item .wf-num {
+      font-family: var(--f-mono);
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: .5rem;
+    }
+
+    .wireframe-item .wf-title {
+      font-family: var(--f-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .01em;
+      color: var(--ink);
+      margin-bottom: .4rem;
+    }
+
+    .wireframe-item .wf-desc {
+      font-size: .82rem;
+      line-height: 1.55;
+      color: var(--ink-mid);
+    }
+
+    /* Before / after comparison rows */
+    .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      .before-after {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .ba-cell {
+      background: var(--bg);
+      padding: 1.4rem 1.6rem;
+    }
+
+    .ba-cell .ba-label {
+      font-family: var(--f-mono);
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: .6rem;
+    }
+
+    .ba-cell.after .ba-label {
+      color: var(--accent-dk);
+    }
+
+    .ba-cell p {
+      font-size: .88rem;
+      line-height: 1.65;
+      color: var(--ink-mid);
+      max-width: none;
+    }
+
+    /* Improvement list using finding-card style */
+    .improvement-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .improvement-item {
+      padding: 1.2rem 0;
+      border-top: 3px solid var(--accent);
+    }
+
+    .improvement-item h3 {
+      font-size: .95rem;
+      font-family: var(--f-body);
+      font-weight: 600;
+      text-transform: none;
+      letter-spacing: 0;
+      margin-bottom: .4rem;
+      color: var(--ink);
+    }
+
+    .improvement-item p {
+      font-size: .85rem;
+      line-height: 1.65;
+      color: var(--ink-mid);
+      max-width: none;
+    }
+
+    /* Section spacing inside process-block */
+    .process-block+.process-block {
+      margin-top: 3.5rem;
+    }
+
+    /* Sub-heading inside sections */
+    .sub-heading {
+      font-family: var(--f-display);
+      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .01em;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      margin-top: 2.5rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SVG filter defs -->
+  <svg class="svg-defs" aria-hidden="true">
+    <defs>
+      <filter id="grease" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="4" seed="2" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="/home.html" class="nav-back">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M10 3L5 8l5 5" />
+      </svg>
+      All Projects
+    </a>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#research">Research</a>
+      <a href="#flows">Flows</a>
+      <a href="#testing">Testing</a>
+      <a href="#reflection">Reflection</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <span class="hero-eyebrow">Case Study — UX Research & Product Design</span>
+    <h1 class="hero-title">
+      MindSea
+      <svg class="mark-underline" viewBox="0 0 760 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M4,14 C80,6 180,20 280,12 C380,4 460,22 560,13 C630,7 700,17 756,12" />
+      </svg>
+    </h1>
+    <div class="hero-meta">
+      <div class="stack-list">
+        <span class="stack-pill hi">Figma</span>
+        <span class="stack-pill hi">LucidChart</span>
+        <span class="stack-pill hi2">Wireframing</span>
+        <span class="stack-pill hi2">Prototyping</span>
+        <span class="stack-pill">User Testing</span>
+        <span class="stack-pill">User Research</span>
+
+        <span class="stack-pill">Personas</span>
+      </div>
+      <div class="hero-scroll" aria-hidden="true">
+        <div class="hero-scroll-line"></div>
+        Scroll to explore
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+     01 OVERVIEW
+══════════════════════════════════════════ -->
+  <section class="section" id="overview">
+    <div class="container">
+      <p class="section-label">01 — Overview</p>
+      <h2>A <span class="u2">mental health</span> tracker for students</h2>
+      <p>MindSea is a mobile app designed to help students track their emotions over time, understand how mood patterns
+        affect academic performance, and access self-help resources from meditation techniques to local professional
+        care.</p>
+
+      <div class="overview-grid">
+
+        <div class="overview-cell">
+          <div class="label">Role</div>
+          <div>UX Research, Persona development, Wireframing, Prototyping, User Testing</div>
+        </div>
+
+        <div class="overview-cell">
+          <div class="label">Team</div>
+          <div>Faiza Rahman, Favour Nwachukwu, Julie Pilz, Nilanjan Ghatak, Saba Gul</div>
+        </div>
+        <div class="overview-cell">
+          <div class="label">Deliverables</div>
+          <div>Design a mental health app that tracks emotions and provides resources for students</div>
+        </div>
+      </div>
+
+
+
+      <!-- Problem callout -->
+      <div class="callout blue " style="margin-top: 2.5rem;">
+        <div class="callout-label">The Design Question</div>
+        <p>How do our emotions affect our academic performance and how do we make that visible to students in a way
+          that's private, accessible, and easy enough to use every day?</p>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-item">
+          <div class="stat-number circled">3
+            <svg class="scribble-circle" viewBox="-20 -20 120 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M50,2 C75,-3 95,10 95,25 C95,52 75,68 50,70 C25,72 2,58 2,35 C2,12 22,-2 50,2 Z" />
+            </svg>
+          </div>
+          <div class="stat-label">User personas <br>researched</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">8+</div>
+          <div class="stat-label">Wireframe <br>screens designed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Design iterations <br>from testing</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number">10</div>
+          <div class="stat-label">live <br>testers</div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- PROCESS -->
+    <section class="section" id="process">
+      <div class="container">
+        <p class="section-label">02 — Process</p>
+
+        <div class="phase">
+          <div>
+            Phase 01<br>
+            <strong>Research</strong>
+          </div>
+          <div>
+            <strong>Understanding user needs, expectations, and outcomes</strong>
+            <p>Surveyed and interviewed students to identify emotional pain points tied to academic performance. Created
+              personas to anchor design decisions in real user needs.</p>
+          </div>
+        </div>
+        <div class="phase">
+          <div>
+            Phase 02<br>
+            <strong>Prototyping</strong>
+          </div>
+          <div>
+            <strong>Creating clear and minimal user flows for ease of use</strong>
+            <p>Mapped all core user journeys, logging, reviewing stats, reading articles, finding resources, then
+              produced wireframes for all 8 screens.</p>
+          </div>
+        </div>
+        <div class="phase">
+          <div>
+            Phase 03<br>
+            <strong>Testing</strong>
+          </div>
+          <div>
+            <strong>Using structured interviews to recognise weak points</strong>
+            <p>Ran Think Aloud sessions combined with semi-structured interviews. Prioritised open pathways over
+              feature-specific evaluation to catch unexpected friction.</p>
+          </div>
+        </div>
+        <div class="phase">
+          <div>
+            Phase 04<br>
+            <strong>Final Product</strong>
+          </div>
+          <div>
+            <strong>Polishing the interactive prototype based on learnings</strong>
+            <p>Applied a high-impact, low-effort change list. Reduced click counts, improved label clarity, enforced
+              consistent icon language, and added a dark mode.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+
+    <!-- ══════════════════════════════════════════
+     02 USER RESEARCH
+══════════════════════════════════════════ -->
+    <section class="section" id="research">
+      <div class="container">
+        <p class="section-label">02 — User Research</p>
+        <h2>Who are we <span class="u">designing for?</span></h2>
+        <p>Our target audience is students who want to better understand how their emotional state connects to their
+          studies. We started by brainstorming the core features users would need, then grounded those decisions in
+          three
+          user personas representing different accessibility needs, cultural contexts, and relationships with
+          technology.
+        </p>
+
+        <div class="sub-heading">Personas</div>
+
+        <div class="persona-grid fade-in">
+          <div class="persona-card">
+            <div class="persona-name">Michael</div>
+            <div class="persona-age">21 years old — Psychology, Howard University</div>
+            <p>Third-year undergraduate on a football scholarship. Familiar with technology but doesn't discuss emotions
+              openly. Colour blind and prefers interfaces he can use without contacts. Currently struggling to progress
+              with
+              coursework despite being socially well-adjusted.</p>
+            <div style="margin-top: 1rem;">
+              <span class="stack-pill">Accessibility</span>
+              <span class="stack-pill" style="margin-left:.4rem">Colour contrast</span>
+            </div>
+          </div>
+          <div class="persona-card">
+            <div class="persona-name">Sarah</div>
+            <div class="persona-age">25 years old — Linguistics, Graduate student</div>
+            <p>International student from China, two years in the US. Struggles with spoken English confidence, leading
+              to
+              anxiety in class discussions and presentations. Tech-savvy and organised so uses her laptop heavily.
+              Experiences frustration that accumulates across the day.</p>
+            <div style="margin-top: 1rem;">
+              <span class="stack-pill">Language support</span>
+              <span class="stack-pill" style="margin-left:.4rem">Multilingual UI</span>
+            </div>
+          </div>
+          <div class="persona-card">
+            <div class="persona-name">Quinn</div>
+            <div class="persona-age">23 years old — Neuroscience</div>
+            <p>Reduced finger dexterity from an accident makes standard mobile UI difficult to use. Requires an
+              adaptable
+              interface. Academically recovered after a difficult first year but gets highly frustrated when learning
+              takes longer than expected. Has formal academic accommodations.</p>
+            <div style="margin-top: 1rem;">
+              <span class="stack-pill">Motor accessibility</span>
+              <span class="stack-pill" style="margin-left:.4rem">Adaptable UI</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Findings callout -->
+        <div class="callout " style="margin-top: 2.5rem;">
+          <div class="callout-label">Research Findings</div>
+          <p>The personas converged on three design priorities: <strong>usability</strong> (minimal friction to log),
+            <strong>repeatability</strong> (easy enough to return to daily), and <strong>privacy</strong> (data behind a
+            username, never exposed). For emotion selection we adopted Plutchik's Wheel of Emotions as a base, then
+            refined the options through direct student surveys.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+     03 USER FLOWS & WIREFRAMES
+══════════════════════════════════════════ -->
+    <section class="section" id="flows">
+      <div class="container">
+        <p class="section-label">03 — User Flows & Wireframes</p>
+        <h2>Mapping the <span class="u">experience</span></h2>
+        <p>We chose mobile as the platform to encourage in-the-moment logging. Studying adjacent health and fitness apps
+          informed the structure: a nav split into Logging, Stats, Articles, and Resources. The key design tension was
+          balancing depth (multiple emotions per log, intensity scale, category tags) against speed; every extra tap is
+          a
+          reason not to log.</p>
+
+        <div class="feature-grid feature-grid--row " style="margin-top: 2rem;">
+          <div class="feature-card">
+            <div class="feature-num">Principle 01</div>
+            <div class="feature-title">Proportions over moments</div>
+            <p class="feature-desc">Stats show emotional patterns across weeks and months, not individual log entries.
+              The user sees the shape of their experience, not a ledger of bad days.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-num">Principle 02</div>
+            <div class="feature-title">Recognition over recall</div>
+            <p class="feature-desc">Common icons, graph conventions borrowed from fitness apps, and a checklist tag
+              system
+              mean users identify options rather than having to remember or type them.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-num">Principle 03</div>
+            <div class="feature-title">Metaphor as onboarding</div>
+            <p class="feature-desc">Framing logs as diary entries grounds the interaction in a familiar mental model,
+              reducing the learning curve for first-time users.</p>
+          </div>
+        </div>
+
+        <div class="sub-heading">Wireframes — V1 Screens</div>
+        <p>Eight screens covering the full user journey from onboarding through to settings.</p>
+
+        <div class="wireframe-grid ">
+          <div class="wireframe-item">
+            <div class="wf-num">01</div>
+            <div class="wf-title">Login</div>
+            <p class="wf-desc">Name, gender, birthday, password setup. Must accept T&Cs to reach the landing page.</p>
+          </div>
+          <div class="wireframe-item">
+            <div class="wf-num">02</div>
+            <div class="wf-title">Home</div>
+            <p class="wf-desc">Welcome screen with a prompt to check in and create a new log.</p>
+          </div>
+          <div class="wireframe-item">
+            <div class="wf-num">03</div>
+            <div class="wf-title">Summary</div>
+            <p class="wf-desc">Review emotions across different time periods — weekly and monthly views.</p>
+          </div>
+          <div class="wireframe-item">
+            <div class="wf-num">04</div>
+            <div class="wf-title">Monthly View</div>
+            <p class="wf-desc">Number of logs per topic and most common associated emotion. Arrows to navigate months.
+            </p>
+          </div>
+          <div class="wireframe-item">
+            <div class="wf-num">05</div>
+            <div class="wf-title">Log Mood</div>
+            <p class="wf-desc">0–5 intensity slider, time selection, hashtag category, and optional notes.</p>
+          </div>
+          <div class="wireframe-item">
+            <div class="wf-num">06</div>
+            <div class="wf-title">Articles</div>
+            <p class="wf-desc">Web articles and videos surfaced based on recent logs and patterns.</p>
+          </div>
+          <div class="wireframe-item">
+            <div class="wf-num">07</div>
+            <div class="wf-title">Resources</div>
+            <p class="wf-desc">Local clinics and mental health providers for professional support.</p>
+          </div>
+          <div class="wireframe-item">
+            <div class="wf-num">08</div>
+            <div class="wf-title">Settings</div>
+            <p class="wf-desc">Account info, categories, and language preferences.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+     04 TESTING
+══════════════════════════════════════════ -->
+    <section class="section" id="testing">
+      <div class="container">
+        <p class="section-label">04 — Testing</p>
+        <h2>What users <span class="u2">actually did</span></h2>
+        <p>Prototyping gave us confidence in the concept. Testing gave us the corrections. We ran multiple user tests
+          specifically to avoid designing in isolation and went in expecting to find problems.</p>
+
+        <div class="two-col " style="margin-top: 2rem;">
+          <div>
+            <div class="sub-heading" style="margin-top: 0;">Technique</div>
+            <p class="body-text">We combined a <strong>Think Aloud</strong> study with a brief <strong>semi-structured
+                interview</strong>. The goal wasn't to evaluate specific features, it was to understand the pathways
+              users took naturally and surface unexpected friction. Keeping the prompts open meant participants led the
+              session rather than following our assumptions.</p>
+          </div>
+          <div>
+            <div class="sub-heading" style="margin-top: 0;">Findings</div>
+            <p class="body-text">Reactions were mixed. Many appreciated the clean, modern interface, but some found it
+              confusing without colour. The greyscale prototype made graphs feel overwhelming rather than informative.
+              Icon and emoji usage was inconsistent enough to break recognition. The "Check-In" label caused repeated
+              confusion about the core feature.</p>
+          </div>
+        </div>
+
+        <div class="sub-heading ">Improvements made</div>
+        <p class="">A high-impact, low-effort change list guided the iteration. Every change addressed a specific
+          friction point observed during testing.</p>
+
+        <div class="improvement-list ">
+          <div class="improvement-item">
+            <h3>"Check-In" → "Log Mood"</h3>
+            <p>The original label caused consistent confusion about what the action did. Renaming it resolved the
+              ambiguity for the app's most-used feature.</p>
+          </div>
+          <div class="improvement-item">
+            <h3>Log from anywhere</h3>
+            <p>Added the Log Mood button to the persistent top bar. Since it's the most frequent action, it needed to be
+              reachable from every screen without navigating back to Home.</p>
+          </div>
+          <div class="improvement-item">
+            <h3>Emotion-mapped colours</h3>
+            <p>Applied consistent colour coding tied to emotion categories across the entire app. Pressing and holding a
+              graph element reveals its label, thereby reducing cognitive load while keeping depth available.</p>
+          </div>
+          <div class="improvement-item">
+            <h3>Tags → Checklist</h3>
+            <p>Replaced the freeform hashtag system with a predefined checklist. Eliminated misspelling errors and made
+              categorisation faster by enabling recognition over recall.</p>
+          </div>
+          <div class="improvement-item">
+            <h3>Emoji removal</h3>
+            <p>Emojis were inconsistent with the icon set used elsewhere in the app. Replaced with the same
+              emotion-colour
+              system from the stats screens for a unified visual language.</p>
+          </div>
+          <div class="improvement-item">
+            <h3>QoL additions</h3>
+            <p>Logout button, in-app tutorials, and a dark mode, each low effort with meaningful impact on first-use
+              experience and long-term retention.</p>
+          </div>
+        </div>
+
+        <!-- Before / after for two key screens -->
+        <div class="sub-heading ">Before → After: Key screens</div>
+
+        <div class="before-after ">
+          <div class="ba-cell">
+            <div class="ba-label">Before - Home</div>
+            <p>"Check-In" button on landing. No way to log from other screens. Greyscale made the hierarchy ambiguous.
+            </p>
+          </div>
+          <div class="ba-cell after">
+            <div class="ba-label">After - Home</div>
+            <p>"Log Mood" with matching icon in the top bar. Accessible from any screen. Clearer primary action
+              hierarchy.
+            </p>
+          </div>
+        </div>
+
+        <div class="before-after " style="margin-top: 1px;">
+          <div class="ba-cell">
+            <div class="ba-label">Before — Log</div>
+            <p>Freeform hashtag input for categories. Prone to misspelling and inconsistency across logs.</p>
+          </div>
+          <div class="ba-cell after">
+            <div class="ba-label">After — Log</div>
+            <p>Predefined checklist. Faster to complete, eliminates errors, editable in Settings.</p>
+          </div>
+        </div>
+
+        <div class="before-after " style="margin-top: 1px;">
+          <div class="ba-cell">
+            <div class="ba-label">Before — Stats</div>
+            <p>Greyscale graphs with emoji labels. Overwhelming without colour; emojis felt inconsistent with icon set.
+            </p>
+          </div>
+          <div class="ba-cell after">
+            <div class="ba-label">After — Stats</div>
+            <p>Emotion-mapped colours applied consistently. Press-and-hold reveals labels. Tutorial added to top right.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+     05 REFLECTION
+══════════════════════════════════════════ -->
+    <section class="section" id="reflection">
+      <div class="container">
+        <p class="section-label">05 — Reflection</p>
+        <h2>What I <span class="u">learned</span></h2>
+        <p>MindSea was my first end-to-end UX project, from research through to a tested, iterated prototype. The gap
+          between what we designed and what users actually did during testing was the most instructive part.</p>
+        <div class="two-col">
+          <div class="callout">
+            <div class="callout-label">Key Takeaway</div>
+            <p>User testing revealed issues that static reviews missed, proving that real behavior matters more than
+              assumptions. Designing for accessibility from the start led to better decisions around usability and
+              interaction. Balancing depth with speed ensured the core experience stayed quick while allowing optional
+              detail. Prioritizing recognition over recall made the app more intuitive and easier to use daily.</p>
+          </div>
+
+          <div class="callout">
+            <div class="callout-label">Skills Built</div>
+            <p>Strengthened user testing and the ability to turn insights into design improvements. Built a solid
+              foundation
+              in accessibility-first design for diverse user needs. Improved prioritization by balancing simplicity with
+              feature depth. Enhanced ability to design intuitive, low-friction interfaces using familiar patterns.</p>
+          </div>
+        </div>
+    </section>
+
+
+  <footer>
+    <div class="footer-left">Faiza Rahman — Portfolio</div>
+    <div class="footer-right">
+      <a href="../home.html" class="footer-link">Home</a>
+      <a href="https://github.com/frahma1" target="_blank" class="footer-link">GitHub</a>
+      <a href="https://www.linkedin.com/in/faiza-rahman/" target="_blank" class="footer-link">LinkedIn</a>
+    </div>
+  </footer>
+
+    <script>
+      const nav = document.getElementById('main-nav');
+      window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 40);
+      }, { passive: true });
+
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+    </script>
+</body>
+
+</html>
