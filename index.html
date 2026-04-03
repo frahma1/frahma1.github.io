@@ -58,15 +58,16 @@
                     <span class="underlined">Data Driven
                         <svg viewBox="0 0 300 12" fill="none" aria-hidden="true">
                             <defs>
-                            <filter id="grease" x="-2%" y="-80%" width="104%" height="260%">
-                                <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="4" seed="8"
-                                    result="noise" />
-                                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2" xChannelSelector="R"
-                                    yChannelSelector="G" />
-                            </filter>
-                        </defs>
+                                <filter id="grease" x="-2%" y="-80%" width="104%" height="260%">
+                                    <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="4" seed="8"
+                                        result="noise" />
+                                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2" xChannelSelector="R"
+                                        yChannelSelector="G" />
+                                </filter>
+                            </defs>
                             <path d="M3 8 C80 5, 120 8, 180 6 C230 2, 200 9, 297 6" stroke="#C8F135" stroke-width="3.5"
-                                stroke-linecap="round" stroke-dasharray="320" stroke-dashoffset="320"filter="url(#grease)">
+                                stroke-linecap="round" stroke-dasharray="320" stroke-dashoffset="320"
+                                filter="url(#grease)">
                                 <animate attributeName="stroke-dashoffset" from="320" to="0" dur="0.9s" begin="0.55s"
                                     fill="freeze" />
                             </path>
@@ -172,7 +173,16 @@
         </div>
 
         <div class="project-row">
-            <div class="project-spacer"></div>
+            <div class="project-spacer project-visual">
+                <svg class="project-visual-bg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice"
+                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="30" y="30" width="40" height="40" rx="14" ry="14" fill="none"
+                        stroke="White" stroke-width=".25" />
+                </svg>
+                <div class="project-visual-frame">
+                    <img src="/images/mindsea_mu0.png" alt="project mockup" class="project-visual-img" />
+                </div>
+            </div>
             <a class="project-card right reveal" href="pages/mindsea.html" target="_blank">
                 <div>
                     <h2>MindSea</h2>
@@ -184,6 +194,7 @@
                     <div class="project-arrow">↗</div>
                 </div>
             </a>
+
         </div>
     </section>
 
